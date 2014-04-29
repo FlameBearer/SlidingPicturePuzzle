@@ -1,28 +1,65 @@
 package com.example.slidingpicturepuzzle;
 
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-public class MyGridImageAdapter extends ArrayAdapter<Drawable>{
+public class MyGridImageAdapter extends BaseAdapter{
+	private Context mContext;
+	private final Drawable[] mImages;
+	private LayoutInflater mInflater;
+	private int mLayout;
 	
 	public MyGridImageAdapter(Context context, Drawable[] images ){
-		super(context, R.layout.gridimage, images);
+		mContext = context;
+		mImages = images;
+		mLayout = R.layout.gridimage;
+		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 	
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent){
-		View view = super.getView(position, convertView, parent);
+		
+		return createViewFromResource(position, convertView, parent, mLayout);
+		
+	}
+	
+	private View createViewFromResource(int position, View convertView, ViewGroup parent, int resource) {
+        
+		View view;
+
+		if (convertView == null) {
+			view = mInflater.inflate(resource, parent, false);
+		} 
+        
+		else {
+			view = convertView;   
+        }
+        
 		ImageView imgView = (ImageView) view.findViewById(R.id.gridImage);
-		
-		final Drawable img = getItem(position);
-		
-		imgView.setImageDrawable(img);
-		
-		return view;
+		imgView.setImageDrawable(mImages[position]);
+
+        return view;
+    }
+
+	@Override
+	public int getCount() {
+		return mImages.length;
+	}
+
+	@Override
+	public Object getItem(int arg0) {
+		return mImages[arg0];
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		return 0;
 	}
 
 }

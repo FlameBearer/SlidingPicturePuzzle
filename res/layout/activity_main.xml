@@ -1,35 +1,32 @@
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
-	tools:context=".MainActivity"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent" >
-	
-	<LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical" >
-	
-	    <TextView
-	        style="@style/mainTextView"
-	        android:text="@string/selection" />
-	    
-	    <GridView 
-	        android:id="@+id/imageSelection"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_margin="10dp"
-	        android:verticalSpacing="10dp"
-	        android:horizontalSpacing="10dp"
-	        android:columnWidth="200dp"
-	        android:numColumns="auto_fit"
-	       	 >
-	        
-	    </GridView>
-	
-	    <TextView
-	        style="@style/mainTextView"
-	        android:text="@string/addDelete" />
-	    
-	</LinearLayout>
-</ScrollView>
+	tools:context=".MainActivity" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        style="@style/mainTextView"
+        android:text="@string/selection" />
+    
+    <GridView 
+        android:id="@+id/imageSelection"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:columnWidth="200dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth" >
+        
+    </GridView>
+
+    <TextView
+        style="@style/mainTextView"
+        android:text="@string/addDelete" />
+    
+</LinearLayout>
+
