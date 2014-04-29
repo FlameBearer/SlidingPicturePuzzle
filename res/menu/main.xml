@@ -1,9 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+    <item android:id="@+id/addImage" android:title="@string/addImage"></item>
+    <item android:id="@+id/deleteImage" android:title="@string/deleteImage"></item>
+    
 
 </menu>
