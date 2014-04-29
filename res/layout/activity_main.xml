@@ -13,6 +13,19 @@
 	    <TextView
 	        style="@style/mainTextView"
 	        android:text="@string/selection" />
+	    
+	    <GridView 
+	        android:id="@+id/imageSelection"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="10dp"
+	        android:verticalSpacing="10dp"
+	        android:horizontalSpacing="10dp"
+	        android:columnWidth="200dp"
+	        android:numColumns="auto_fit"
+	       	 >
+	        
+	    </GridView>
 	
 	    <TextView
 	        style="@style/mainTextView"
