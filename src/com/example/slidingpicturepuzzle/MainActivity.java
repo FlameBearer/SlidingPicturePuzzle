@@ -2,7 +2,11 @@ package com.example.slidingpicturepuzzle;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
+import android.widget.GridView;
 
 public class MainActivity extends Activity {
 
@@ -10,6 +14,22 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        GridView selection = (GridView) this.findViewById(R.id.imageSelection);
+        
+        Resources res = getResources();
+        
+        TypedArray icons = res.obtainTypedArray(R.array.default_image_options);
+        Drawable [] images = new Drawable[icons.length()];
+        
+        for(int i = 0; i < icons.length(); i++)
+        	images[i] = icons.getDrawable(i);
+        
+        icons.recycle();
+        
+        MyGridImageAdapter adapter = new MyGridImageAdapter(this, images);
+        
+        selection.setAdapter(adapter);
     }
 
 

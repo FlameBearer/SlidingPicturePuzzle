@@ -33,11 +33,13 @@ public final class R {
         public static final int taco_truck_logo=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f090001;
+        public static final int action_settings=0x7f090002;
+        public static final int gridImage=0x7f090001;
         public static final int imageSelection=0x7f090000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int gridimage=0x7f030001;
     }
     public static final class menu {
         public static final int main=0x7f080000;
