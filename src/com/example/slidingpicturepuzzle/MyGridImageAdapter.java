@@ -43,7 +43,7 @@ public class MyGridImageAdapter extends BaseAdapter{
         
 		ImageView imgView = (ImageView) view.findViewById(R.id.gridImage);
 		imgView.setImageDrawable(mImages[position]);
-		imgView.setBackgroundColor(0xFFFF0000);
+		
         return view;
     }
 
@@ -59,7 +59,7 @@ public class MyGridImageAdapter extends BaseAdapter{
 
 	@Override
 	public long getItemId(int arg0) {
-		return 0;
+		return arg0;
 	}
 
 }

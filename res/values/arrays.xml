@@ -8,6 +8,8 @@
         <item>@drawable/charmander_large</item>
         <item>@drawable/squirtle_large</item>
         <item>@drawable/taco_truck_logo</item>
+        <item>@drawable/ic_launcher</item>
+        
     </array>
     
 </resources>
