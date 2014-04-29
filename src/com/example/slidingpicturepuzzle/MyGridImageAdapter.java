@@ -19,7 +19,7 @@ public class MyGridImageAdapter extends BaseAdapter{
 		mContext = context;
 		mImages = images;
 		mLayout = R.layout.gridimage;
-		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 	
 	@Override
