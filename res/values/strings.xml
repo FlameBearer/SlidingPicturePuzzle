@@ -3,6 +3,7 @@
 
     <string name="app_name">SlidingPicturePuzzle</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="selection">Please select an Image</string>
+    <string name="addDelete">Click Menu to Add and or Delete Images</string>
 
 </resources>
