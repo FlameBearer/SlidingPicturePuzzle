@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <array name="default_image_options">
+        <item>@drawable/beef_fajita</item>
+        <item>@drawable/bulbasaur_large</item>
+        <item>@drawable/dirty_sanchez</item>
+        <item>@drawable/charmander_large</item>
+        <item>@drawable/squirtle_large</item>
+        <item>@drawable/taco_truck_logo</item>
+    </array>
+    
+</resources>
