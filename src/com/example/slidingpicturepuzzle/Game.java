@@ -7,12 +7,26 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.GridView;
+import android.widget.TableLayout;
 
 public class Game extends Activity {
+	private TableLayout mGameBoard;
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_layout);
+        
+        mGameBoard = (TableLayout) this.findViewById(R.id.gameBoard);
+        Resources res = getResources();
+        
+        TypedArray icons = res.obtainTypedArray(R.array.default_image_options);
+        Drawable [] images = new Drawable[icons.length()];
+        
+        for(int i = 0; i < icons.length(); i++)
+        	images[i] = icons.getDrawable(i);
+        
+        icons.recycle();
+        GameBoard board = new GameBoard(mGameBoard, 3, images[1]);
         
         
     }

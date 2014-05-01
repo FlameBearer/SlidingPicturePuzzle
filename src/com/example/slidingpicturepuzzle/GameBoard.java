@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.TableLayout;
 
 public class GameBoard {
@@ -14,7 +15,7 @@ public class GameBoard {
 	private int mBoardMaxWidth;
 	private Bitmap mBoardImage;
 	
-	public GameBoard(TableLayout board,int size, Drawable img){
+	public GameBoard(TableLayout board, int size, Drawable img){
 		mIsComplete = false;
 		mBoardMaxHeight = board.getHeight();
 		mBoardMaxWidth = board.getWidth();
@@ -77,10 +78,11 @@ public class GameBoard {
 			}
 			
 		}
+	
+		Log.d("CMD", "ScaleWidth: " + scaleWidth + " ScaleHeight: " + scaleHeight );
 		
-		LayoutParams params = (LayoutParams) board.getLayoutParams();
-		params.width = scaleWidth;
-		params.height = scaleHeight;
+		TableLayout.LayoutParams params =  new TableLayout.LayoutParams(scaleWidth, scaleHeight);
+
 		board.setLayoutParams(params);
 	}
 
