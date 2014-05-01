@@ -79,7 +79,7 @@ public class GameBoard {
 			
 		}
 	
-		Log.d("CMD", "ScaleWidth: " + scaleWidth + " ScaleHeight: " + scaleHeight );
+		//Log.d("CMD", "ScaleWidth: " + scaleWidth + " ScaleHeight: " + mBoardMaxHeight );
 		
 		TableLayout.LayoutParams params =  new TableLayout.LayoutParams(scaleWidth, scaleHeight);
 
