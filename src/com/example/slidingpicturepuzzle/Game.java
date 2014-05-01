@@ -55,19 +55,13 @@ public class Game extends Activity {
                 Log.d("Layout", "H: " + mGameBoard.getHeight() + " W" + mGameBoard.getWidth() + " C: "+ contentHeight);
                 Point dim = new Point(mGameBoard.getWidth(), contentHeight - mGameBoard.getHeight());
                 GameBoard board = new GameBoard(mTable, dim, 3, mImage);
+                
             }
         });
         
         
         
     }
-//	@Override
-//	public void onWindowFocusChanged (boolean hasFocus) {
-//	        // the height will be set at this point
-//		Log.d("Game", "H: " + mGameBoard.getHeight() + " W: " + mGameBoard.getWidth() );
-//		//GameBoard board = new GameBoard(mGameBoard, 3, mImage);
-//		//Log.d("GameAfter", "H: " + mGameBoard.getHeight() + "W: " + mGameBoard.getWidth() );
-//	}
 
 
     @Override

@@ -14,6 +14,7 @@ public class GameBoard {
 	private boolean mIsComplete;
 	private int mBoardMaxHeight;
 	private int mBoardMaxWidth;
+	private Point mSize;
 	private Bitmap mBoardImage;
 	
 	public GameBoard(TableLayout board, Point dim, int size, Drawable img){
@@ -21,6 +22,7 @@ public class GameBoard {
 		mBoardMaxHeight = dim.y;
 		mBoardMaxWidth = dim.x;
 		mBoardImage = ((BitmapDrawable) img).getBitmap();
+		
 		setBoardDim(board);
 		
 		
@@ -82,10 +84,9 @@ public class GameBoard {
 		}
 	
 		Log.d("CMD", "ScaleWidth: " + scaleWidth + " ScaleHeight: " + scaleHeight);
-		
-		TableLayout.LayoutParams params =  new TableLayout.LayoutParams(scaleWidth, scaleHeight);
+		mSize = new Point(scaleWidth, scaleHeight);
 
-		board.setLayoutParams(params);
+		
 	}
 
 }
