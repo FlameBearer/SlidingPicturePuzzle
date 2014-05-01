@@ -1,12 +1,16 @@
 package com.example.slidingpicturepuzzle;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
+import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -18,6 +22,15 @@ public class Game extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_layout);
+        
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+        
+        Log.d("CMD", "H: " + height + "W: " + width );
         
         mGameBoard = (TableLayout) this.findViewById(R.id.gameBoard);
         LinearLayout test = (LinearLayout) this.findViewById(R.id.game);
