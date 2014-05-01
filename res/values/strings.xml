@@ -7,5 +7,6 @@
     <string name="addDelete">Click Menu to Add and or Delete Images</string>
     <string name="addImage">Add Image</string>
     <string name="deleteImage">Delete Image</string>
+    <string name="moveCount">0</string>
 
 </resources>

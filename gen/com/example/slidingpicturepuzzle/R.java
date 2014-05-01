@@ -33,10 +33,12 @@ public final class R {
         public static final int taco_truck_logo=0x7f020006;
     }
     public static final class id {
-        public static final int addImage=0x7f090002;
-        public static final int deleteImage=0x7f090003;
-        public static final int gridImage=0x7f090001;
+        public static final int addImage=0x7f090004;
+        public static final int deleteImage=0x7f090005;
+        public static final int gameBoard=0x7f090002;
+        public static final int gridImage=0x7f090003;
         public static final int imageSelection=0x7f090000;
+        public static final int moveCounter=0x7f090001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -52,6 +54,7 @@ public final class R {
         public static final int addImage=0x7f060004;
         public static final int app_name=0x7f060000;
         public static final int deleteImage=0x7f060005;
+        public static final int moveCount=0x7f060006;
         public static final int selection=0x7f060002;
     }
     public static final class style {
