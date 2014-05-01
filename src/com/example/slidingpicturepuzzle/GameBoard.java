@@ -30,6 +30,7 @@ public class GameBoard {
 		int imgHeight = mBoardImage.getHeight();
 		int imgWidth = mBoardImage.getWidth();
 		int scaleWidth, scaleHeight;
+		Log.d("CMD", "H: " + mBoardMaxHeight + " W: " + mBoardMaxHeight);
 		if(imgHeight > imgWidth){
 			scaleHeight = mBoardMaxHeight;
 			
@@ -79,7 +80,7 @@ public class GameBoard {
 			
 		}
 	
-		//Log.d("CMD", "ScaleWidth: " + scaleWidth + " ScaleHeight: " + mBoardMaxHeight );
+		Log.d("CMD", "ScaleWidth: " + scaleWidth + " ScaleHeight: " + scaleHeight);
 		
 		TableLayout.LayoutParams params =  new TableLayout.LayoutParams(scaleWidth, scaleHeight);
 

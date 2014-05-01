@@ -30,7 +30,7 @@ public class Game extends Activity {
         	images[i] = icons.getDrawable(i);
         
         icons.recycle();
-        mImage = images[1];
+        mImage = images[images.length -1];
         
         
         
@@ -38,8 +38,9 @@ public class Game extends Activity {
 	@Override
 	public void onWindowFocusChanged (boolean hasFocus) {
 	        // the height will be set at this point
-		//Log.d("Game", "Height -> " + mGameBoard.getHeight());
+		Log.d("Game", "H: " + mGameBoard.getHeight() + "W: " + mGameBoard.getWidth() );
 		GameBoard board = new GameBoard(mGameBoard, 3, mImage);
+		Log.d("GameAfter", "H: " + mGameBoard.getHeight() + "W: " + mGameBoard.getWidth() );
 	}
 
 
