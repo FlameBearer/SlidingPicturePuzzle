@@ -3,6 +3,7 @@ package com.example.slidingpicturepuzzle;
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -15,10 +16,10 @@ public class GameBoard {
 	private int mBoardMaxWidth;
 	private Bitmap mBoardImage;
 	
-	public GameBoard(TableLayout board, int size, Drawable img){
+	public GameBoard(TableLayout board, Point dim, int size, Drawable img){
 		mIsComplete = false;
-		mBoardMaxHeight = board.getHeight();
-		mBoardMaxWidth = board.getWidth();
+		mBoardMaxHeight = dim.y;
+		mBoardMaxWidth = dim.x;
 		mBoardImage = ((BitmapDrawable) img).getBitmap();
 		setBoardDim(board);
 		
