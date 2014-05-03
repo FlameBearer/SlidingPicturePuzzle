@@ -45,7 +45,7 @@ public class Game extends Activity {
         	images[i] = icons.getDrawable(i);
         
         icons.recycle();
-        mImage = images[images.length -1];
+        mImage = images[0];
         
         contentView.post(new Runnable()
         {

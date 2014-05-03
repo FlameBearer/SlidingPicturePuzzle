@@ -7,7 +7,9 @@ import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 
 public class GameBoard {
 	private GamePiece mBoard[][];
@@ -16,19 +18,31 @@ public class GameBoard {
 	private int mBoardMaxWidth;
 	private Point mSize;
 	private Bitmap mBoardImage;
+	private Context mContext;
+	private TableLayout mTable;
 	
 	public GameBoard(TableLayout board, Point dim, int size, Drawable img){
 		mIsComplete = false;
 		mBoardMaxHeight = dim.y;
 		mBoardMaxWidth = dim.x;
 		mBoardImage = ((BitmapDrawable) img).getBitmap();
+		mContext = board.getContext();
+		mTable = board;
 		
-		setBoardDim(board);
+		setBoardDim();
+		createImages();
+		setTable(size);
 		
 		
 	}
 	
-	private void setBoardDim(TableLayout board){
+	private void createImages() {
+		
+		mBoardImage = Bitmap.createScaledBitmap(mBoardImage, mSize.x, mSize.y, false);
+		
+	}
+
+	private void setBoardDim(){
 		
 		int imgHeight = mBoardImage.getHeight();
 		int imgWidth = mBoardImage.getWidth();
@@ -66,8 +80,7 @@ public class GameBoard {
 				scaleHeight = mBoardMaxHeight;
 				
 			}
-			
-			
+					
 		}
 		else{
 			
@@ -88,5 +101,31 @@ public class GameBoard {
 
 		
 	}
+	
+	private void setTable(int size){
+		
+		int width = mSize.x / size;
+		int height = mSize.y / size;
+		
+		
+		for(int i = 0; i < size; i++){
+			
+			TableRow tr = new TableRow(mContext);
+			
+			for(int j = 0; j < size; j++){
+				
+				ImageView cell = new ImageView(mContext);
+				cell.setImageBitmap(mBoardImage);
+				tr.addView(cell, width, height);
+				
+			}
+			
+			mTable.addView(tr);
+		}
+	}
 
 }
+
+
+
+
