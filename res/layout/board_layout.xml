@@ -15,7 +15,10 @@
         android:id="@+id/gameBoard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#FFF"
+        android:background="#000"
+        android:divider="@color/divider"
+        android:dividerPadding="5dp"
+        android:showDividers="middle"
         android:layout_gravity= "center">
         
     </TableLayout>
