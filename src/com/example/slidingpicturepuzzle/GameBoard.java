@@ -30,18 +30,24 @@ public class GameBoard {
 		mBoardMaxWidth = dim.x;
 		mBoardImage = ((BitmapDrawable) img).getBitmap();
 		mBoardSize = size;
-		mBoard = new GamePiece[mBoardSize][mBoardSize];
+		mBoard = null;
 		mContext = context;
 		setBoardDim();
 		if(mBoardDim.x > 0 && mBoardDim.y > 0){
 			mPieceSize.x = mBoardDim.x / size;
 			mPieceSize.y = mBoardDim.y / size;
-			
+			mBoard = new GamePiece[mBoardSize][mBoardSize];		
+			createGameBoard();
 		}
 		
 		
 	}
-	
+	public boolean isBoardCreated(){
+		if(mBoard == null)
+			return false;
+		else
+			return true;
+	}
 	private void createPiece(GamePiece piece) {
 		
 		Drawable image;
@@ -49,6 +55,7 @@ public class GameBoard {
 		Bitmap img;
 		img = Bitmap.createBitmap(mBoardImage, mPieceSize.x * piece.getRow(), mPieceSize.y * piece.getCol(), mPieceSize.x, mPieceSize.y);
 		image = new BitmapDrawable(mContext.getResources(), img);
+		piece.setImage(image);
 		
 	}
 	
@@ -57,6 +64,7 @@ public class GameBoard {
 			for(int j = 0; j < mBoardSize; j++){
 				mBoard[i][j] = new GamePiece((i*mBoardSize) + j);
 				mBoard[i][j].setPosition(i,j);
+				createPiece(mBoard[i][j]);
 			}
 		}
 	}
