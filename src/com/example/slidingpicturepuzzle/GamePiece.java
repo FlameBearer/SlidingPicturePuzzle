@@ -1,10 +1,12 @@
 package com.example.slidingpicturepuzzle;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 public class GamePiece {
-	private Bitmap mImg;
+	private Drawable mImg;
 	private final int mNumber;
+	private int [] mPosition;
 	private int mMobility;
 	public static final int NONE = 0;
 	public static final int LEFT = 1;
@@ -12,17 +14,36 @@ public class GamePiece {
 	public static final int UP = 3;
 	public static final int DOWN = 4;
 	
-	public GamePiece(Bitmap img, int number){
+	public GamePiece(Drawable img, int number){
 		mImg = img;
 		mNumber = number;
-		mMobility = NONE;
+		mPosition = new int[2];
+		setPosition(-1, -1);
+		setMobility(NONE);
 	}
 	
 	public int getNumber(){
 		return mNumber;
 	}
-	public Bitmap getImage(){
+	
+	public Drawable getImage(){
 		return mImg;
 	}
+	
+	public int[] getPosition(){
+		return mPosition;
+	}
+	
+	public void setPosition(int row, int col){
+		mPosition[0] = row;
+		mPosition[1] = col;
+	}
+	
+	public int getMobility(){
+		return mMobility;
+	}
 
+	public void setMobility(int direction){
+		mMobility = direction;
+	}
 }
