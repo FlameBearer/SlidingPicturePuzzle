@@ -13,48 +13,55 @@ import android.widget.TableRow;
 
 public class GameBoard {
 	private GamePiece mBoard[][];
+	private GamePiece layout[];
 	private boolean mIsComplete;
 	private int mBoardMaxHeight;
 	private int mBoardMaxWidth;
-	private Point mSize;
+	private int mBoardSize;
+	private Point mBoardDim;
+	private Point mPieceSize;
 	private Bitmap mBoardImage;
 	private Context mContext;
-	private TableLayout mTable;
+
 	
-	public GameBoard(TableLayout board, Point dim, int size, Drawable img){
+	public GameBoard(Point dim, int size, Drawable img, Context context){
 		mIsComplete = false;
 		mBoardMaxHeight = dim.y;
 		mBoardMaxWidth = dim.x;
 		mBoardImage = ((BitmapDrawable) img).getBitmap();
-		mContext = board.getContext();
-		mTable = board;
-		mBoard = new GamePiece[size][size];
-		
+		mBoardSize = size;
+		mBoard = new GamePiece[mBoardSize][mBoardSize];
+		mContext = context;
 		setBoardDim();
-		if(mSize.x > 0 && mSize.y > 0){
-			createImages(size);
-			setTable(size);
+		if(mBoardDim.x > 0 && mBoardDim.y > 0){
+			mPieceSize.x = mBoardDim.x / size;
+			mPieceSize.y = mBoardDim.y / size;
+			
 		}
 		
 		
 	}
 	
-	private void createImages(int size) {
-		if(mSize.x > 0 && mSize.y > 0){
-			mBoardImage = Bitmap.createScaledBitmap(mBoardImage, mSize.x, mSize.y, false);
-			int pieceWidth = mSize.x / size;
-			int pieceHeight = mSize.y / size;
-			Bitmap img;
-			for(int i = 0; i < size; i++){
-				for(int j = 0; j < size; j++){
-					img = Bitmap.createBitmap(mBoardImage, pieceWidth * i, pieceHeight * j, pieceWidth, pieceHeight);
-					mBoard[i][j] = new GamePiece(img, 0);
-					
-				}
-			}
-		}
+	private void createPiece(GamePiece piece) {
+		
+		Drawable image;
+		mBoardImage = Bitmap.createScaledBitmap(mBoardImage, mBoardDim.x, mBoardDim.y, false);
+		Bitmap img;
+		img = Bitmap.createBitmap(mBoardImage, mPieceSize.x * piece.getRow(), mPieceSize.y * piece.getCol(), mPieceSize.x, mPieceSize.y);
+		image = new BitmapDrawable(mContext.getResources(), img);
 		
 	}
+	
+	private void createGameBoard(){
+		for(int i = 0; i < mBoardSize; i++){
+			for(int j = 0; j < mBoardSize; j++){
+				mBoard[i][j] = new GamePiece((i*mBoardSize) + j);
+				mBoard[i][j].setPosition(i,j);
+			}
+		}
+	}
+		
+
 
 	private void setBoardDim(){
 		
@@ -112,34 +119,34 @@ public class GameBoard {
 	
 		Log.d("CMD", "ScaleWidth: " + scaleWidth + " ScaleHeight: " + scaleHeight);
 		
-		mSize = new Point(scaleWidth, scaleHeight);
+		mBoardDim = new Point(scaleWidth, scaleHeight);
 
 		
 	}
 	
-	private void setTable(int size){
-		
-		int width = mSize.x / size;
-		int height = mSize.y / size;
-		LayoutParams p = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		p.setMargins(1, 1, 1, 1);
-		
-		for(int i = 0; i < size; i++){
-			
-			TableRow tr = new TableRow(mContext);
-			
-			for(int j = 0; j < size; j++){
-				
-				ImageView cell = new ImageView(mContext);
-				cell.setImageBitmap(mBoard[j][i].getImage());
-				cell.setLayoutParams(p);
-				tr.addView(cell, width, height);
-				
-			}
-			
-			mTable.addView(tr);
-		}
-	}
+//	private void setTable(int size){
+//		
+//		int width = mSize.x / size;
+//		int height = mSize.y / size;
+//		LayoutParams p = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+//		p.setMargins(1, 1, 1, 1);
+//		
+//		for(int i = 0; i < size; i++){
+//			
+//			TableRow tr = new TableRow(mContext);
+//			
+//			for(int j = 0; j < size; j++){
+//				
+//				ImageView cell = new ImageView(mContext);
+//				cell.setImageBitmap(mBoard[j][i].getImage());
+//				cell.setLayoutParams(p);
+//				tr.addView(cell, width, height);
+//				
+//			}
+//			
+//			mTable.addView(tr);
+//		}
+//	}
 
 }
 

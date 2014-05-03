@@ -54,7 +54,7 @@ public class Game extends Activity {
                 int contentHeight = contentView.getHeight();
                 Log.d("Layout", "H: " + mGameBoard.getHeight() + " W" + mGameBoard.getWidth() + " C: "+ contentHeight);
                 Point dim = new Point(mGameBoard.getWidth(), contentHeight - mGameBoard.getHeight());
-                GameBoard board = new GameBoard(mTable, dim, 3, mImage);
+               // GameBoard board = new GameBoard(mTable, dim, 3, mImage);
                 
             }
         });

@@ -14,8 +14,8 @@ public class GamePiece {
 	public static final int UP = 3;
 	public static final int DOWN = 4;
 	
-	public GamePiece(Drawable img, int number){
-		mImg = img;
+	public GamePiece(int number){
+		mImg = null;
 		mNumber = number;
 		mPosition = new int[2];
 		setPosition(-1, -1);
@@ -30,8 +30,20 @@ public class GamePiece {
 		return mImg;
 	}
 	
+	public void setImage(Drawable img){
+		mImg = img;
+	}
+	
 	public int[] getPosition(){
 		return mPosition;
+	}
+	
+	public int getRow(){
+		return mPosition[0];
+	}
+	
+	public int getCol(){
+		return mPosition[1];
 	}
 	
 	public void setPosition(int row, int col){
