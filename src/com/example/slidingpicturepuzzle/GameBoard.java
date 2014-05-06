@@ -26,6 +26,8 @@ public class GameBoard {
 	
 	public GameBoard(int size){
 		mBoardSize = size;
+		
+		
 //		mIsComplete = false;
 //		mBoardMaxHeight = dim.y;
 //		mBoardMaxWidth = dim.x;
@@ -44,6 +46,11 @@ public class GameBoard {
 		
 	}
 	
+	public void setImage(Drawable drawable){
+		mBoardImage = ((BitmapDrawable) drawable).getBitmap();
+		setImageRatio();
+	}
+	
 	public void setPieceSize(int width, int height){
 		mPieceSize.x = width;
 		mPieceSize.y = height;
@@ -57,8 +64,8 @@ public class GameBoard {
 		return mBoardSize;
 	}
 	
-	public void setImageRatio(Bitmap img){
-		mImageRatio = (float) img.getWidth() / img.getHeight();
+	public void setImageRatio(){
+		mImageRatio = (float) mBoardImage.getWidth() / mBoardImage.getHeight();
 	}
 	
 	public float getImageRatio(){
@@ -152,32 +159,7 @@ public class GameBoard {
 		
 		mBoardDim = new Point(scaleWidth, scaleHeight);
 
-		
 	}
-	
-//	private void setTable(int size){
-//		
-//		int width = mSize.x / size;
-//		int height = mSize.y / size;
-//		LayoutParams p = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-//		p.setMargins(1, 1, 1, 1);
-//		
-//		for(int i = 0; i < size; i++){
-//			
-//			TableRow tr = new TableRow(mContext);
-//			
-//			for(int j = 0; j < size; j++){
-//				
-//				ImageView cell = new ImageView(mContext);
-//				cell.setImageBitmap(mBoard[j][i].getImage());
-//				cell.setLayoutParams(p);
-//				tr.addView(cell, width, height);
-//				
-//			}
-//			
-//			mTable.addView(tr);
-//		}
-//	}
 
 }
 

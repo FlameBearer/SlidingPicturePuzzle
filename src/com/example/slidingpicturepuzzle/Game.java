@@ -37,41 +37,21 @@ public class Game extends Activity {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+             
+        Resources res = getResources();
         
+        TypedArray icons = res.obtainTypedArray(R.array.default_image_options);
+        Drawable [] images = new Drawable[icons.length()];
         
- 
+        for(int i = 0; i < icons.length(); i++)
+        	images[i] = icons.getDrawable(i);
         
-   
-        
-//        //Log.d("CMD", "H: " + height + " W: " + width + " Top: " + getStatusBarHeight());
-//        
-//        mTable = (TableLayout) this.findViewById(R.id.gameBoard);
-//        
-//        Resources res = getResources();
-//        
-//        TypedArray icons = res.obtainTypedArray(R.array.default_image_options);
-//        Drawable [] images = new Drawable[icons.length()];
-//        
-//        for(int i = 0; i < icons.length(); i++)
-//        	images[i] = icons.getDrawable(i);
-//        
-//        icons.recycle();
-//        mImage = images[0];
-//        
-//        contentView.post(new Runnable()
-//        {
-//            public void run()
-//            {
-//                int contentHeight = contentView.getHeight();
-//                Log.d("Layout", "H: " + mGameBoard.getHeight() + " W" + mGameBoard.getWidth() + " C: "+ contentHeight);
-//                Point dim = new Point(mGameBoard.getWidth(), contentHeight - mGameBoard.getHeight());
-//               // GameBoard board = new GameBoard(mTable, dim, 3, mImage);
-//                
-//            }
-//        });
-        
-        
-        
+        icons.recycle();
+        mImage = images[0];
+        newGame(3);
+        mBoard.setImage(mImage);
+        initGame();
+        initBoard();
     }
 	
 	protected void initGame(){
@@ -93,6 +73,9 @@ public class Game extends Activity {
 				super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 			}
 		};
+		
+		mGameLayout.setBackgroundResource(R.color.background);
+		
 		setContentView(mGameLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 	}
 	
@@ -102,6 +85,7 @@ public class Game extends Activity {
 	
 	protected void initBoard(){
 		mTable = new TableLayout(this);
+		mTable.setBackgroundResource(R.color.table);
 		final int boardSize = mBoard.getSize();
 		mCells = new ImageView[boardSize][boardSize];
 		
@@ -176,13 +160,5 @@ public class Game extends Activity {
         return true;
     }
     
-    public int getStatusBarHeight() {
-    	  int result = 0;
-    	  int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-    	  if (resourceId > 0) {
-    	      result = getResources().getDimensionPixelSize(resourceId);
-    	  }
-    	  return result;
-    	}
 
 }
