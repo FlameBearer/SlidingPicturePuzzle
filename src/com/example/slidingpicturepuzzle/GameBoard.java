@@ -23,24 +23,30 @@ public class GameBoard {
 	private Context mContext;
 
 	
-	public GameBoard(Point dim, int size, Drawable img, Context context){
-		mIsComplete = false;
-		mBoardMaxHeight = dim.y;
-		mBoardMaxWidth = dim.x;
-		mBoardImage = ((BitmapDrawable) img).getBitmap();
+	public GameBoard(int size){
 		mBoardSize = size;
-		mBoard = null;
-		mContext = context;
-		setBoardDim();
-		if(mBoardDim.x > 0 && mBoardDim.y > 0){
-			mPieceSize.x = mBoardDim.x / size;
-			mPieceSize.y = mBoardDim.y / size;
-			mBoard = new GamePiece[mBoardSize][mBoardSize];		
-			createGameBoard();
-		}
+//		mIsComplete = false;
+//		mBoardMaxHeight = dim.y;
+//		mBoardMaxWidth = dim.x;
+//		mBoardImage = ((BitmapDrawable) img).getBitmap();
+//		mBoardSize = size;
+//		mBoard = null;
+//		mContext = context;
+//		setBoardDim();
+//		if(mBoardDim.x > 0 && mBoardDim.y > 0){
+//			mPieceSize.x = mBoardDim.x / size;
+//			mPieceSize.y = mBoardDim.y / size;
+//			mBoard = new GamePiece[mBoardSize][mBoardSize];		
+//			createGameBoard();
+//		}
 		
 		
 	}
+	
+	public int getSize(){
+		return mBoardSize;
+	}
+	
 	public boolean isBoardCreated(){
 		if(mBoard == null)
 			return false;
