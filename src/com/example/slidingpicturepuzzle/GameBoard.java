@@ -17,6 +17,7 @@ public class GameBoard {
 	private int mBoardMaxHeight;
 	private int mBoardMaxWidth;
 	private int mBoardSize;
+	private float mImageRatio;
 	private Point mBoardDim;
 	private Point mPieceSize;
 	private Bitmap mBoardImage;
@@ -45,6 +46,14 @@ public class GameBoard {
 	
 	public int getSize(){
 		return mBoardSize;
+	}
+	
+	public void setImageRatio(Bitmap img){
+		mImageRatio = (float) img.getWidth() / img.getHeight();
+	}
+	
+	public float getImageRatio(){
+		return mImageRatio;
 	}
 	
 	public boolean isBoardCreated(){

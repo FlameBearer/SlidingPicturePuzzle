@@ -8,6 +8,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
@@ -116,6 +117,38 @@ public class Game extends Activity {
 		}
 	}
 
+	//resizes content for spacing between cells
+	protected void resizeContent(int screenWidth, int screenHeight){
+		
+		float imageRatio = mBoard.getImageRatio();
+		int boardSize = mBoard.getSize();
+		DisplayMetrics metrics = getResources().getDisplayMetrics();
+		int borderWidth = (int) Math.ceil(metrics.density);
+		int spacing = borderWidth * 2 * boardSize;
+		float newRatio = (float) (screenWidth - spacing) / (screenHeight -  spacing);
+		
+		int width, height;
+		if(newRatio > imageRatio){
+			//scale to screen height
+			height = screenHeight;
+			width = (int) (imageRatio * height);
+			
+		}
+		else {
+			//scale to screen height
+			width = screenWidth;
+			height = (int) (width / imageRatio);
+		}
+		
+		height -= height % boardSize;
+		width -= width % boardSize;
+		
+		RelativeLayout.LayoutParams boardParams = new RelativeLayout.LayoutParams(width, height);
+		boardParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+		mTable.setLayoutParams(boardParams);
+		
+		//load and resize the image
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
