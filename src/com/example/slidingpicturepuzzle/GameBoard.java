@@ -91,7 +91,7 @@ public class GameBoard {
 			Log.e("CMD", "Bitmap not created yet");
 		mBoardImage = Bitmap.createScaledBitmap(mBoardImage, mPieceSize.x * mBoardSize, mPieceSize.y * mBoardSize, false);
 		Bitmap img;
-		img = Bitmap.createBitmap(mBoardImage, mPieceSize.x * piece.getRow(), mPieceSize.y * piece.getCol(), mPieceSize.x, mPieceSize.y);
+		img = Bitmap.createBitmap(mBoardImage, mPieceSize.x * piece.getCol(), mPieceSize.y * piece.getRow(), mPieceSize.x, mPieceSize.y);
 		image = new BitmapDrawable(mContext.getResources(), img);
 		piece.setImage(image);
 		
