@@ -12,56 +12,80 @@ import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.WindowManager;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 
 public class Game extends Activity {
-	private LinearLayout mGameBoard;
+	private RelativeLayout mGameBoard;
 	private Drawable mImage;
 	private TableLayout mTable;
+	private int mLastWidth = -1, mLastHeight = -1;
+	private ImageView[][] cells;
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.board_layout);
-        mGameBoard = (LinearLayout) this.findViewById(R.id.game);
-        final View contentView = findViewById(android.R.id.content);
+        
         
  
         
    
         
-        //Log.d("CMD", "H: " + height + " W: " + width + " Top: " + getStatusBarHeight());
-        
-        mTable = (TableLayout) this.findViewById(R.id.gameBoard);
-        
-        Resources res = getResources();
-        
-        TypedArray icons = res.obtainTypedArray(R.array.default_image_options);
-        Drawable [] images = new Drawable[icons.length()];
-        
-        for(int i = 0; i < icons.length(); i++)
-        	images[i] = icons.getDrawable(i);
-        
-        icons.recycle();
-        mImage = images[0];
-        
-        contentView.post(new Runnable()
-        {
-            public void run()
-            {
-                int contentHeight = contentView.getHeight();
-                Log.d("Layout", "H: " + mGameBoard.getHeight() + " W" + mGameBoard.getWidth() + " C: "+ contentHeight);
-                Point dim = new Point(mGameBoard.getWidth(), contentHeight - mGameBoard.getHeight());
-               // GameBoard board = new GameBoard(mTable, dim, 3, mImage);
-                
-            }
-        });
+//        //Log.d("CMD", "H: " + height + " W: " + width + " Top: " + getStatusBarHeight());
+//        
+//        mTable = (TableLayout) this.findViewById(R.id.gameBoard);
+//        
+//        Resources res = getResources();
+//        
+//        TypedArray icons = res.obtainTypedArray(R.array.default_image_options);
+//        Drawable [] images = new Drawable[icons.length()];
+//        
+//        for(int i = 0; i < icons.length(); i++)
+//        	images[i] = icons.getDrawable(i);
+//        
+//        icons.recycle();
+//        mImage = images[0];
+//        
+//        contentView.post(new Runnable()
+//        {
+//            public void run()
+//            {
+//                int contentHeight = contentView.getHeight();
+//                Log.d("Layout", "H: " + mGameBoard.getHeight() + " W" + mGameBoard.getWidth() + " C: "+ contentHeight);
+//                Point dim = new Point(mGameBoard.getWidth(), contentHeight - mGameBoard.getHeight());
+//               // GameBoard board = new GameBoard(mTable, dim, 3, mImage);
+//                
+//            }
+//        });
         
         
         
     }
+	
+	protected void initGame(){
+		mGameBoard = new RelativeLayout(this){
+		
+			@Override
+			protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+				int width = MeasureSpec.getSize(widthMeasureSpec);
+				int height = MeasureSpec.getSize(heightMeasureSpec);
+			
+			
+				if(width != mLastWidth || height != mLastHeight){
+					if(0 < getChildCount())
+						resizeContent(width, height);
+					mLastWidth = width;
+					mLastHeight = height;
+				}
+				super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+			}
+		}
+	}
 
 
     @Override

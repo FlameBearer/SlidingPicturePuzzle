@@ -13,7 +13,6 @@ import android.widget.TableRow;
 
 public class GameBoard {
 	private GamePiece mBoard[][];
-	private GamePiece layout[];
 	private boolean mIsComplete;
 	private int mBoardMaxHeight;
 	private int mBoardMaxWidth;
