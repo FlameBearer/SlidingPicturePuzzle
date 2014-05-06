@@ -29,7 +29,7 @@ public class Game extends Activity {
 	private Drawable mImage;
 	private TableLayout mTable;
 	private int mLastWidth = -1, mLastHeight = -1;
-	private ImageView[][] cells;
+	private ImageView[][] mCells;
 	public static final int EASY = 3;
 	public static final int MEDIUM = 4;
 	public static final int HARD = 5;
@@ -103,13 +103,13 @@ public class Game extends Activity {
 	protected void initBoard(){
 		mTable = new TableLayout(this);
 		final int boardSize = mBoard.getSize();
-		cells = new ImageView[boardSize][boardSize];
+		mCells = new ImageView[boardSize][boardSize];
 		
 		for(int i = 0; i < boardSize; i++){
 			TableRow row = new TableRow(this);
 			for(int j = 0; j < boardSize; j++){
 				ImageView img = new ImageView(this);
-				cells[i][j] = img;
+				mCells[i][j] = img;
 				//img.setOnClickListener(this);
 				row.addView(img);
 			}
@@ -148,6 +148,25 @@ public class Game extends Activity {
 		mTable.setLayoutParams(boardParams);
 		
 		//load and resize the image
+		width = width / boardSize - 2 * borderWidth;
+		height = height / boardSize - 2 * borderWidth;
+		mBoard.setPieceSize(width, height);
+		//load image from intent?
+		//mBoard.loadImage(this);
+		
+		TableRow.LayoutParams cellParams = new TableRow.LayoutParams(width, height);
+		cellParams.setMargins(borderWidth, borderWidth, borderWidth, borderWidth);
+		
+		for(int i = 0; i < boardSize; i++){
+			for(int j = 0; j < boardSize; j++){
+				ImageView img = mCells[i][j];
+				img.setLayoutParams(cellParams);
+				GamePiece piece = mBoard.getPieceAt(i, j);
+				img.setImageDrawable(piece.getImage());
+				img.setTag(piece);
+			}
+		}
+		
 	}
 
     @Override

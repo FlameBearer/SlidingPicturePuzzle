@@ -44,6 +44,15 @@ public class GameBoard {
 		
 	}
 	
+	public void setPieceSize(int width, int height){
+		mPieceSize.x = width;
+		mPieceSize.y = height;
+	}
+	
+	public GamePiece getPieceAt(int row, int col){
+		return mBoard[row][col];
+	}
+	
 	public int getSize(){
 		return mBoardSize;
 	}
