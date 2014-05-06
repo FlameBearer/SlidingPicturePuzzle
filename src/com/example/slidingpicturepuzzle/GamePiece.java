@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 
 public class GamePiece {
 	private Drawable mImg;
-	private final int mNumber;
+	private int mNumber;
 	private int [] mPosition;
 	private int mMobility;
 	public static final int NONE = 0;

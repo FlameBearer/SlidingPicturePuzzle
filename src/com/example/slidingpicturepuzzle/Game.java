@@ -50,8 +50,11 @@ public class Game extends Activity {
         mImage = images[0];
         newGame(3);
         mBoard.setImage(mImage);
+        
         initGame();
         initBoard();
+        mGameLayout.addView(mTable);
+        mGameLayout.invalidate();
     }
 	
 	protected void initGame(){
@@ -65,8 +68,8 @@ public class Game extends Activity {
 			
 				if(width != mLastWidth || height != mLastHeight){
 					//implement later
-					//if(0 < getChildCount())
-						//resizeContent(width, height);
+					if(0 < getChildCount())
+						resizeContent(width, height);
 					mLastWidth = width;
 					mLastHeight = height;
 				}
@@ -74,7 +77,7 @@ public class Game extends Activity {
 			}
 		};
 		
-		mGameLayout.setBackgroundResource(R.color.background);
+		//mGameLayout.setBackgroundResource(R.color.background);
 		
 		setContentView(mGameLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 	}
@@ -136,7 +139,7 @@ public class Game extends Activity {
 		height = height / boardSize - 2 * borderWidth;
 		mBoard.setPieceSize(width, height);
 		//load image from intent?
-		//mBoard.loadImage(this);
+		mBoard.loadImage(this);
 		
 		TableRow.LayoutParams cellParams = new TableRow.LayoutParams(width, height);
 		cellParams.setMargins(borderWidth, borderWidth, borderWidth, borderWidth);
