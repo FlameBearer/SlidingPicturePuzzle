@@ -1,12 +1,19 @@
 package com.example.slidingpicturepuzzle;
 
 
+import java.util.ArrayList;
+
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 
 public class MyGridImageAdapter extends BaseAdapter{
@@ -29,7 +36,7 @@ public class MyGridImageAdapter extends BaseAdapter{
 		
 	}
 	
-	private View createViewFromResource(int position, View convertView, ViewGroup parent, int resource) {
+	private View createViewFromResource(final int position, View convertView, ViewGroup parent, int resource) {
         
 		View view;
 
@@ -44,7 +51,27 @@ public class MyGridImageAdapter extends BaseAdapter{
 		ImageView imgView = (ImageView) view.findViewById(R.id.gridImage);
 		imgView.setImageDrawable(mImages[position]);
 		
+		view.setOnClickListener(new OnClickListener(){
+        	
+        	@Override
+        	public void onClick(View view){
+        		launchGame(mImages[position]);
+//        		Intent intent = new Intent(mContext, Game.class);
+//        		ArrayList<Drawable> img = new ArrayList<Drawable>();
+//        		img.set(0, mImages[position]);
+//        		launchGame();
+//        		startActivityForResult(intent, MainActivity.GAME_REQUEST);
+        	}
+        });
+		
         return view;
+    }
+	
+    private void launchGame(Drawable img){
+    	Intent intent = new Intent(mContext, Game.class);
+    	Bitmap image = ((BitmapDrawable)img).getBitmap();
+    	intent.putExtra(MainActivity.SELECTED_IMAGE_KEY, image);
+//    	startActivityForResult(intent, MainAcitivty.GAME_REQUEST);
     }
 
 	@Override

@@ -1,7 +1,11 @@
 package com.example.slidingpicturepuzzle;
 
+import java.util.ArrayList;
+
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -9,11 +13,16 @@ import android.view.Menu;
 import android.widget.GridView;
 
 public class MainActivity extends Activity {
+	
+	public static final String SELECTED_IMAGE_KEY = "SelectedImage";
+	public static final int GAME_REQUEST = 1969;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+       
         
         GridView selection = (GridView) this.findViewById(R.id.imageSelection);
         
@@ -30,6 +39,7 @@ public class MainActivity extends Activity {
         MyGridImageAdapter adapter = new MyGridImageAdapter(this, images);
         
         selection.setAdapter(adapter);
+        
     }
 
 
