@@ -55,22 +55,18 @@ public class MyGridImageAdapter extends BaseAdapter{
         	
         	@Override
         	public void onClick(View view){
-        		launchGame(mImages[position]);
-//        		Intent intent = new Intent(mContext, Game.class);
-//        		ArrayList<Drawable> img = new ArrayList<Drawable>();
-//        		img.set(0, mImages[position]);
-//        		launchGame();
-//        		startActivityForResult(intent, MainActivity.GAME_REQUEST);
+        		launchGame(position);
+        		ImageView img = (ImageView) view;
+        		img.setColorFilter(R.color.dimmer);
         	}
         });
 		
         return view;
     }
 	
-    private void launchGame(Drawable img){
+    private void launchGame(int position){
     	Intent intent = new Intent(mContext, Game.class);
-    	Bitmap image = ((BitmapDrawable)img).getBitmap();
-    	intent.putExtra(MainActivity.SELECTED_IMAGE_KEY, image);
+    	intent.putExtra(MainActivity.SELECTED_IMAGE_KEY, position);
     	//startActivityForResult(intent, MainActivity.GAME_REQUEST);
     	mContext.startActivity(intent);
     }

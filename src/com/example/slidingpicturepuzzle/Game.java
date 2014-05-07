@@ -1,7 +1,5 @@
 package com.example.slidingpicturepuzzle;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -14,7 +12,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -49,9 +46,10 @@ public class Game extends Activity {
         icons.recycle();
         
 		Intent intent = getIntent();
-		Bitmap img = (Bitmap)this.getIntent().getParcelableExtra(MainActivity.SELECTED_IMAGE_KEY);
-        //mImage = images[1];
-		mImage = new BitmapDrawable(res, img);
+		Bundle extras = getIntent().getExtras();
+		int position = extras.getInt(MainActivity.SELECTED_IMAGE_KEY);
+		Log.d("CMD", "Position: " + position);
+        mImage = images[position];
         newGame(EASY);
         mBoard.setImage(mImage);
         
@@ -93,12 +91,12 @@ public class Game extends Activity {
 		mBoard = new GameBoard(difficutly);
 	}
 	
-	public void onClick(View view){
-		final Object tag = view.getTag();
-		ImageView imgView = (ImageView) view;
-		imgView.setColorFilter(R.color.dimmer);
-		
-	}
+//	public void onClick(View view){
+//		final Object tag = view.getTag();
+//		ImageView imgView = (ImageView) view;
+//		imgView.setColorFilter(R.color.dimmer);
+//		
+//	}
 	
 	//Implement hopefully
 //	private final class MyTouchListener implements OnTouchListener {
