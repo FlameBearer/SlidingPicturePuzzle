@@ -214,7 +214,7 @@ public class Game extends Activity {
 					img.setOnClickListener(null);
 			}
 		}
-		
+		shuffle();
 	}
 
 	private final class pieceClick implements View.OnClickListener {
@@ -228,12 +228,6 @@ public class Game extends Activity {
 		    	Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
 				Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
 	    	}
-	    	else{
-	    	
-				ImageView imgView = (ImageView) view;
-				imgView.setColorFilter(R.color.dimmer);
-	    	}
-	    	
 	    	
 	     }          
 	    
@@ -254,6 +248,23 @@ public class Game extends Activity {
 			return true;
 		else
 			return false;
+	}
+	
+	private void shuffle(){
+		int boardSize = mBoard.getSize();
+		int row, col;
+		for(int i = 0; i < 1000; i++){
+			row = (int) (Math.random() * (boardSize));
+			col = (int) (Math.random() * (boardSize));
+			Log.d("Shuffle", "Row: " + row + "Col: " + col);
+			ImageView img = mCells[row][col];
+			GamePiece move = mBoard.getPieceAt(row, col);
+			if(move == null)
+				Log.e("move", "Move is null");
+			else if(checkMobility(move))
+				swapPieces(move);
+			
+		}
 	}
 	
 	private void swapPieces(GamePiece piece){
