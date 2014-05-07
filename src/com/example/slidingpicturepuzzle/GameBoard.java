@@ -1,15 +1,12 @@
 package com.example.slidingpicturepuzzle;
 
-import android.app.ActionBar.LayoutParams;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 
 public class GameBoard {
 	private GamePiece mBoard[][];
@@ -36,6 +33,14 @@ public class GameBoard {
 		return mBlank;
 	}
 	
+	public void print(){
+		for(int i = 0; i < mBoardSize; i++){
+			for(int j = 0; j < mBoardSize; j++){
+				Log.d("Board", "Piece Number: " + mBoard[i][j].getNumber());
+			}
+		}
+	}
+	
 	public void setImage(Drawable drawable){
 		mBoardImage = ((BitmapDrawable) drawable).getBitmap();
 		setImageRatio();
@@ -43,6 +48,10 @@ public class GameBoard {
 	
 	public void setPieceSize(int width, int height){
 		mPieceSize = new Point(width, height);
+	}
+	
+	public void setPiece(GamePiece piece, int row, int col){
+		mBoard[row][col] = piece;
 	}
 	
 	public GamePiece getPieceAt(int row, int col){

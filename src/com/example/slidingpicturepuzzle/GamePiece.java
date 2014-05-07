@@ -27,6 +27,10 @@ public class GamePiece {
 		return mNumber;
 	}
 	
+	public void setNumber(int num){
+		mNumber = num;
+	}
+	
 	public Drawable getImage(){
 		return mImg;
 	}

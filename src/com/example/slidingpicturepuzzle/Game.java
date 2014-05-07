@@ -225,8 +225,8 @@ public class Game extends Activity {
 	    	
 	    	if(checkMobility(piece)){
 	    		swapPieces(piece);
-		    	Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
-				Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
+		    	//Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
+				//Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
 	    	}
 	    	
 	     }          
@@ -236,10 +236,10 @@ public class Game extends Activity {
 	private boolean checkMobility(GamePiece piece){
 		int row = piece.getRow();
 		int col = piece.getCol();
-		Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
-		Log.d("Piece", "Row: " + row + "Column: " + col);
+		//Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
+		//Log.d("Piece", "Row: " + row + "Column: " + col);
 		if((mBlankRow == row) && (mBlankCol == col)){
-			Log.e("CMD", "Enter no move");
+			//Log.e("CMD", "Enter no move");
 			return false;	
 		}
 		else if(((row - mBlankRow) == 0) && (Math.abs(col - mBlankCol) == 1))
@@ -256,7 +256,7 @@ public class Game extends Activity {
 		for(int i = 0; i < 1000; i++){
 			row = (int) (Math.random() * (boardSize));
 			col = (int) (Math.random() * (boardSize));
-			Log.d("Shuffle", "Row: " + row + "Col: " + col);
+			//Log.d("Shuffle", "Row: " + row + "Col: " + col);
 			if(!(mBlankRow == row && mBlankCol == col)){
 				ImageView img = mCells[row][col];
 				//GamePiece move = mBoard.getPieceAt(row, col);
@@ -268,6 +268,7 @@ public class Game extends Activity {
 			}
 			
 		}
+		mBoard.print();
 	}
 	
 	private void swapPieces(GamePiece piece){
@@ -279,10 +280,12 @@ public class Game extends Activity {
 		
 		GamePiece blank = (GamePiece) two.getTag();
 		
-//		GamePiece blank = new GamePiece((mBlankRow * mBlankCol) + mBlankCol);
-//		blank.setImage(null);
-//		blank.setPosition(mBlankRow, mBlankCol);		
-		//GamePiece blank = mBoard.getPieceAt(mBlankRow, mBlankCol);		
+		GamePiece num1 = mBoard.getPieceAt(row, col);
+		GamePiece num2 = mBoard.getPieceAt(mBlankRow, mBlankCol);
+
+		mBoard.setPiece(num1, mBlankRow, mBlankCol);
+		mBoard.setPiece(num2, row, col);
+		
 		assignPiece(one, blank);
 		assignPiece(two, piece);
 		one.setOnClickListener(null);
