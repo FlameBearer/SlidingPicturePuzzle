@@ -233,6 +233,8 @@ public class Game extends Activity {
 	private boolean checkMobility(GamePiece piece){
 		int row = piece.getRow();
 		int col = piece.getCol();
+		Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
+		Log.d("Piece", "Row: " + row + "Column: " + col);
 		if(mBlankRow == row && mBlankCol == col)
 			return false;
 		
@@ -253,14 +255,13 @@ public class Game extends Activity {
 		
 		GamePiece blank = new GamePiece((mBlankRow * mBlankCol) + mBlankCol);
 		blank.setImage(null);
-		
+		blank.setPosition(mBlankRow, mBlankCol);		
+		//GamePiece blank = mBoard.getPieceAt(mBlankRow, mBlankCol);		
 		assignPiece(one, blank);
 		assignPiece(two, piece);
 		piece.setPosition(mBlankRow, mBlankCol);		
 		mBlankRow = row;
 		mBlankCol = col;
-		
-		Log.d("CMD", "Row: " + mBlankRow + "Column: " + mBlankCol);
 		
 	}
 	
