@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -207,29 +208,35 @@ public class Game extends Activity {
 				img.setImageDrawable(piece.getImage());
 				img.setTag(piece);
 				if(i != (boardSize - 1) || j != (boardSize - 1)){
-					img.setOnClickListener(new View.OnClickListener() {
-					    public void onClick(View view) {
-					    	final Object tag = view.getTag();
-					    	GamePiece piece = (GamePiece) tag;
-					    	
-					    	if(checkMobility(piece)){
-					    		swapPieces(piece);
-						    	Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
-								Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
-					    	}
-					    	else{
-					    	
-								ImageView imgView = (ImageView) view;
-								imgView.setColorFilter(R.color.dimmer);
-					    	}
-					    	
-					    	
-					     }
-					 });
+					img.setOnClickListener(new pieceClick());
 				}
+				else
+					img.setOnClickListener(null);
 			}
 		}
 		
+	}
+
+	private final class pieceClick implements View.OnClickListener {
+	    @Override           
+	    public void onClick(View view) {
+	    	final Object tag = view.getTag();
+	    	GamePiece piece = (GamePiece) tag;
+	    	
+	    	if(checkMobility(piece)){
+	    		swapPieces(piece);
+		    	Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
+				Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
+	    	}
+	    	else{
+	    	
+				ImageView imgView = (ImageView) view;
+				imgView.setColorFilter(R.color.dimmer);
+	    	}
+	    	
+	    	
+	     }          
+	    
 	}
 	
 	private boolean checkMobility(GamePiece piece){
@@ -264,6 +271,8 @@ public class Game extends Activity {
 		//GamePiece blank = mBoard.getPieceAt(mBlankRow, mBlankCol);		
 		assignPiece(one, blank);
 		assignPiece(two, piece);
+		one.setOnClickListener(null);
+		two.setOnClickListener(new pieceClick());
 		piece.setPosition(mBlankRow, mBlankCol);		
 		mBlankRow = row;
 		mBlankCol = col;
