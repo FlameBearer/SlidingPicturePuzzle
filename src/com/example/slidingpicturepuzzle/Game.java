@@ -43,13 +43,13 @@ public class Game extends Activity {
         
         icons.recycle();
         mImage = images[1];
-        newGame(3);
+        newGame(EASY);
         mBoard.setImage(mImage);
         
         initGame();
         initBoard();
-        mBlankRow = 2;
-        mBlankCol = 2;
+       // mBlankRow = 4;
+        //mBlankCol = 4;
         mGameLayout.addView(mTable);
         mGameLayout.invalidate();
    
@@ -165,6 +165,8 @@ public class Game extends Activity {
 		
 		float imageRatio = mBoard.getImageRatio();
 		int boardSize = mBoard.getSize();
+		mBlankRow = boardSize - 1;
+		mBlankCol = boardSize - 1;
 		DisplayMetrics metrics = getResources().getDisplayMetrics();
 		int borderWidth = (int) Math.ceil(metrics.density);
 		int spacing = borderWidth * 2 * boardSize;
@@ -228,6 +230,10 @@ public class Game extends Activity {
 		    	//Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
 				//Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
 	    	}
+	    	if(mBoard.isSolved())
+	    		Log.d("CMD", "Solved!!!");
+	    	else
+	    		mBoard.print();
 	    	
 	     }          
 	    
@@ -253,7 +259,7 @@ public class Game extends Activity {
 	private void shuffle(){
 		int boardSize = mBoard.getSize();
 		int row, col;
-		for(int i = 0; i < 1000; i++){
+		for(int i = 0; i < 10000; i++){
 			row = (int) (Math.random() * (boardSize));
 			col = (int) (Math.random() * (boardSize));
 			//Log.d("Shuffle", "Row: " + row + "Col: " + col);

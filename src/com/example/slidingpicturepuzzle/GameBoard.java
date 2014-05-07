@@ -29,6 +29,18 @@ public class GameBoard {
 		
 	}
 	
+	public boolean isSolved(){
+		int position;
+		for(int i = 0; i < mBoardSize; i++){
+			for(int j = 0; j < mBoardSize; j++){
+				position = (i * j) + j;
+				if(position != mBoard[i][j].getNumber())
+					return false;
+			}
+		}
+		return true;
+	}
+	
 	public GamePiece getBlank(){
 		return mBlank;
 	}
