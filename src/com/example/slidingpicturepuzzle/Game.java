@@ -2,6 +2,8 @@ package com.example.slidingpicturepuzzle;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Point;
@@ -15,6 +17,7 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
+import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -58,6 +61,7 @@ public class Game extends Activity {
         initBoard();
         mGameLayout.addView(mTable);
         mGameLayout.invalidate();
+   
     }
 	
 	protected void initGame(){
@@ -89,6 +93,9 @@ public class Game extends Activity {
 		mBoard = new GameBoard(difficutly);
 	}
 	
+	public void onClick(View view){
+		final Object tag = view.getTag();
+	}
 	
 	//Implement hopefully
 //	private final class MyTouchListener implements OnTouchListener {
@@ -150,7 +157,8 @@ public class Game extends Activity {
 			for(int j = 0; j < boardSize; j++){
 				ImageView img = new ImageView(this);
 				mCells[i][j] = img;
-				img.setOnTouchListener(new MyTouchListener());
+				//img.setOnTouchListener(new MyTouchListener());
+				
 				
 				row.addView(img);
 			}
@@ -203,7 +211,10 @@ public class Game extends Activity {
 				ImageView img = mCells[i][j];
 				img.setLayoutParams(cellParams);
 				GamePiece piece = mBoard.getPieceAt(i, j);
-				img.setImageDrawable(piece.getImage());
+				if(i == 2 && j == 2)
+					img.setImageDrawable(null);
+				else
+					img.setImageDrawable(piece.getImage());
 				img.setTag(piece);
 			}
 		}
@@ -215,6 +226,15 @@ public class Game extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    
+    private void startGame(){
+    	mCells[2][2].setImageDrawable(null);
+    	GamePiece piece1 = mBoard.getPieceAt(2, 1);
+    	GamePiece piece2 = mBoard.getPieceAt(1, 2);
+    	//piece1.setMobility(GamePiece.RIGHT);
+    	//piece2.setMobility(GamePiece.DOWN);
+    	
     }
     
 

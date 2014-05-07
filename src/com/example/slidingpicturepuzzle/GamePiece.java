@@ -19,7 +19,7 @@ public class GamePiece {
 		mNumber = number;
 		mPosition = new int[2];
 		setPosition(-1, -1);
-		setMobility(NONE);
+		mMobility = NONE;
 	}
 	
 	public int getNumber(){

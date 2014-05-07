@@ -65,7 +65,7 @@ public class GameBoard {
 		mContext = context;
 		createGameBoard();
 	}
-	private void createPiece(GamePiece piece) {
+	private void createPiece(GamePiece piece, int mobility) {
 		
 		Drawable image;
 		if(mBoardImage == null)
@@ -75,7 +75,7 @@ public class GameBoard {
 		img = Bitmap.createBitmap(mBoardImage, mPieceSize.x * piece.getCol(), mPieceSize.y * piece.getRow(), mPieceSize.x, mPieceSize.y);
 		image = new BitmapDrawable(mContext.getResources(), img);
 		piece.setImage(image);
-		
+		piece.setMobility(mobility);		
 	}
 	
 	private void createGameBoard(){
@@ -83,7 +83,12 @@ public class GameBoard {
 			for(int j = 0; j < mBoardSize; j++){
 				mBoard[i][j] = new GamePiece((i*mBoardSize) + j);
 				mBoard[i][j].setPosition(i,j);
-				createPiece(mBoard[i][j]);
+				if((i == 2 && j == 1))
+					createPiece(mBoard[i][j], GamePiece.RIGHT);
+				else if(i == 1 && j == 2)
+					createPiece(mBoard[i][j], GamePiece.DOWN);
+				else
+					createPiece(mBoard[i][j], GamePiece.NONE);
 			}
 		}
 	}
