@@ -13,9 +13,8 @@ import android.widget.TableRow;
 
 public class GameBoard {
 	private GamePiece mBoard[][];
+	private GamePiece mBlank;
 	private boolean mIsComplete;
-	private int mBoardMaxHeight;
-	private int mBoardMaxWidth;
 	private int mBoardSize;
 	private float mImageRatio;
 	private Point mPieceSize;
@@ -26,6 +25,9 @@ public class GameBoard {
 	public GameBoard(int size){
 		mBoardSize = size;
 		mBoard = new GamePiece[mBoardSize][mBoardSize];
+		mBlank = new GamePiece((mBoardSize * mBoardSize) - 1);
+		mBlank.setImage(null);
+		//mBlank.setMobility(GamePiece.BLANK);
 		
 	}
 	
@@ -65,7 +67,7 @@ public class GameBoard {
 		mContext = context;
 		createGameBoard();
 	}
-	private void createPiece(GamePiece piece, int mobility) {
+	private void createPiece(GamePiece piece) {
 		
 		Drawable image;
 		if(mBoardImage == null)
@@ -74,8 +76,7 @@ public class GameBoard {
 		Bitmap img;
 		img = Bitmap.createBitmap(mBoardImage, mPieceSize.x * piece.getCol(), mPieceSize.y * piece.getRow(), mPieceSize.x, mPieceSize.y);
 		image = new BitmapDrawable(mContext.getResources(), img);
-		piece.setImage(image);
-		piece.setMobility(mobility);		
+		piece.setImage(image);		
 	}
 	
 	private void createGameBoard(){
@@ -83,14 +84,10 @@ public class GameBoard {
 			for(int j = 0; j < mBoardSize; j++){
 				mBoard[i][j] = new GamePiece((i*mBoardSize) + j);
 				mBoard[i][j].setPosition(i,j);
-				if((i == 2 && j == 1))
-					createPiece(mBoard[i][j], GamePiece.RIGHT);
-				else if(i == 1 && j == 2)
-					createPiece(mBoard[i][j], GamePiece.DOWN);
-				else
-					createPiece(mBoard[i][j], GamePiece.NONE);
+				createPiece(mBoard[i][j]);
 			}
 		}
+		mBoard[mBoardSize - 1][mBoardSize - 1] = mBlank;
 	}
 		
 

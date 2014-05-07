@@ -1,30 +1,15 @@
 package com.example.slidingpicturepuzzle;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.MeasureSpec;
-import android.view.View.OnLongClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -34,6 +19,8 @@ public class Game extends Activity {
 	private GameBoard mBoard;
 	private Drawable mImage;
 	private TableLayout mTable;
+	private int mBlankRow;
+	private int mBlankCol;
 	private int mLastWidth = -1, mLastHeight = -1;
 	private ImageView[][] mCells;
 	public static final int EASY = 3;
@@ -59,6 +46,8 @@ public class Game extends Activity {
         
         initGame();
         initBoard();
+        mBlankRow = 2;
+        mBlankCol = 2;
         mGameLayout.addView(mTable);
         mGameLayout.invalidate();
    
@@ -95,6 +84,9 @@ public class Game extends Activity {
 	
 	public void onClick(View view){
 		final Object tag = view.getTag();
+		ImageView imgView = (ImageView) view;
+		imgView.setColorFilter(R.color.dimmer);
+		
 	}
 	
 	//Implement hopefully
@@ -211,13 +203,56 @@ public class Game extends Activity {
 				ImageView img = mCells[i][j];
 				img.setLayoutParams(cellParams);
 				GamePiece piece = mBoard.getPieceAt(i, j);
-				if(i == 2 && j == 2)
-					img.setImageDrawable(null);
-				else
+//				if(i == 2 && j == 2)
+//					img.setImageDrawable(null);
+//				else
 					img.setImageDrawable(piece.getImage());
 				img.setTag(piece);
+				img.setOnClickListener(new View.OnClickListener() {
+				    public void onClick(View view) {
+				    	final Object tag = view.getTag();
+				    	GamePiece piece = (GamePiece) tag;
+				    	
+				    	if(checkMobility(piece))
+				    		swapPieces(piece);
+				    	else{
+				    	
+							ImageView imgView = (ImageView) view;
+							imgView.setColorFilter(R.color.dimmer);
+				    	}
+				    	
+				    	
+				     }
+				 });
 			}
 		}
+		
+	}
+	
+	private boolean checkMobility(GamePiece piece){
+		int row = piece.getRow();
+		int col = piece.getCol();
+		if((row - mBlankRow) == 0)
+			return true;
+		else if((col - mBlankCol) == 0)
+			return true;
+		else
+			return false;
+	}
+	
+	private void swapPieces(GamePiece piece){
+		ImageView blank = mCells[mBlankRow][mBlankCol];
+		GamePiece blankPiece = mBoard.getPieceAt(mBlankRow, mBlankCol);
+		ImageView view = mCells[piece.getRow()][piece.getCol()];
+		mBlankRow = piece.getRow();
+		mBlankCol = piece.getCol();
+		ImageView temp = view;
+		view = blank;
+		view.setTag(blankPiece);
+		blank = temp;
+		blank.setTag(piece);
+		
+		//view.setTag(two);
 		
 	}
 
@@ -228,14 +263,6 @@ public class Game extends Activity {
         return true;
     }
     
-    private void startGame(){
-    	mCells[2][2].setImageDrawable(null);
-    	GamePiece piece1 = mBoard.getPieceAt(2, 1);
-    	GamePiece piece2 = mBoard.getPieceAt(1, 2);
-    	//piece1.setMobility(GamePiece.RIGHT);
-    	//piece2.setMobility(GamePiece.DOWN);
-    	
-    }
     
 
 }
