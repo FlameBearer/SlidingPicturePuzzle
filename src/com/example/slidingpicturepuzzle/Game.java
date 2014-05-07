@@ -248,9 +248,9 @@ public class Game extends Activity {
 			Log.e("CMD", "Enter no move");
 			return false;	
 		}
-		else if((row - mBlankRow) == 0)
+		else if(((row - mBlankRow) == 0) && (Math.abs(col - mBlankCol) == 1))
 			return true;
-		else if((col - mBlankCol) == 0)
+		else if(((col - mBlankCol) == 0) && (Math.abs(row - mBlankRow) == 1))
 			return true;
 		else
 			return false;
