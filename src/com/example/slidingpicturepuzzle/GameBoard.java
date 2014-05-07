@@ -34,7 +34,7 @@ public class GameBoard {
 			for(int j = 0; j < mBoardSize; j++){
 				position = (i * mBoardSize) + j;
 				if(position != mBoard[i][j].getNumber()){
-					Log.d("Solved", "Postion: " + position + " Piece Number: " + mBoard[i][j].getNumber() + " i: " + i + " j: " + j);
+					//Log.d("Solved", "Postion: " + position + " Piece Number: " + mBoard[i][j].getNumber() + " i: " + i + " j: " + j);
 					
 					return false;
 					

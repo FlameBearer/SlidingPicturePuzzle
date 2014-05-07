@@ -1,6 +1,5 @@
 package com.example.slidingpicturepuzzle;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 public class GamePiece {

@@ -1,7 +1,5 @@
 package com.example.slidingpicturepuzzle;
 
-import java.util.zip.Inflater;
-
 import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,6 +28,7 @@ public class Game extends Activity {
 	private Drawable mImage;
 	private TableLayout mTable;
 	private int mMoveCount = 0;
+	private TextView mCounter;
 	private int mBlankRow;
 	private int mBlankCol;
 	private int mLastWidth = -1, mLastHeight = -1;
@@ -59,9 +59,10 @@ public class Game extends Activity {
         newGame(EASY);
         mBoard.setImage(mImage);
         
+        initCount();
         initGame();
         initBoard();
-        initCount();
+        
         mGameLayout.addView(mMoveCountLayout);
         mGameLayout.addView(mTable);
         mGameLayout.invalidate();
@@ -79,14 +80,19 @@ public class Game extends Activity {
 		text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
 		text.setText(R.string.moveCountString);
 		text.setLayoutParams(textParams);
-		TextView count = new TextView(this);
-		count.setLayoutParams(textParams);
-		count.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-		count.setText(R.string.moveCount);
+		mCounter = new TextView(this);
+		mCounter.setLayoutParams(textParams);
+		mCounter.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+		mCounter.setText(R.string.moveCount);
+		
 		mMoveCountLayout.addView(text);
-		mMoveCountLayout.addView(count);
+		mMoveCountLayout.addView(mCounter);
 		//mMoveCountLayout.setlayou
 		
+	}
+	
+	private void updateCounter(){
+		mCounter.setText(String.valueOf(mMoveCount));
 	}
 	
 	protected void initGame(){
@@ -234,9 +240,10 @@ public class Game extends Activity {
 				GamePiece piece = mBoard.getPieceAt(i, j);
 				img.setImageDrawable(piece.getImage());
 				img.setTag(piece);
-				img.setBackgroundResource(R.color.image);
+				
 				if(i != (boardSize - 1) || j != (boardSize - 1)){
 					img.setOnClickListener(new pieceClick());
+					img.setBackgroundResource(R.color.image);
 				}
 				else
 					img.setOnClickListener(null);
@@ -302,6 +309,7 @@ public class Game extends Activity {
 		}
 		
 		mMoveCount = 0;
+		updateCounter();
 		//mBoard.print();
 	}
 	
@@ -323,12 +331,15 @@ public class Game extends Activity {
 		assignPiece(one, blank);
 		assignPiece(two, piece);
 		one.setOnClickListener(null);
+		one.setBackgroundResource(R.color.table);
 		two.setOnClickListener(new pieceClick());
+		two.setBackgroundResource(R.color.image);
 		piece.setPosition(mBlankRow, mBlankCol);		
 		mBlankRow = row;
 		mBlankCol = col;
 		
 		mMoveCount++;
+		updateCounter();
 		
 		
 	}
@@ -341,10 +352,43 @@ public class Game extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.game_menu, menu);
         return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+    	
+    	switch(item.getItemId()){
+    	
+    	case R.id.easy_setting:
+    		//restart for easy size
+    		break;
+    	
+    	case R.id.medium_settings:
+    		//restart for medium size
+    		break;
+    		
+    	case R.id.hard_settings:
+    		//restart for hard size
+    		break;
+    	}
+		return true;
+    	
     }
     
     
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
