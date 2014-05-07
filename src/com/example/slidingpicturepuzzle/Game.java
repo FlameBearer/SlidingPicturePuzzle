@@ -233,7 +233,10 @@ public class Game extends Activity {
 	private boolean checkMobility(GamePiece piece){
 		int row = piece.getRow();
 		int col = piece.getCol();
-		if((row - mBlankRow) == 0)
+		if(mBlankRow == row && mBlankCol == col)
+			return false;
+		
+		else if((row - mBlankRow) == 0)
 			return true;
 		else if((col - mBlankCol) == 0)
 			return true;
@@ -244,14 +247,16 @@ public class Game extends Activity {
 	private void swapPieces(GamePiece piece){
 		int row = piece.getRow();
 		int col = piece.getCol();
-		
-		GamePiece blankPiece = mBoard.getPieceAt(mBlankRow, mBlankCol);
-		GamePiece temp = piece;
+
 		ImageView one = mCells[piece.getRow()][piece.getCol()];
-		ImageView two = mCells[mBlankRow][mBlankCol];
-		assignPiece(one, blankPiece);
-		assignPiece(two, temp);	
+		ImageView two = mCells[mBlankRow][mBlankCol];	
 		
+		GamePiece blank = new GamePiece((mBlankRow * mBlankCol) + mBlankCol);
+		blank.setImage(null);
+		
+		assignPiece(one, blank);
+		assignPiece(two, piece);
+		piece.setPosition(mBlankRow, mBlankCol);		
 		mBlankRow = row;
 		mBlankCol = col;
 		
