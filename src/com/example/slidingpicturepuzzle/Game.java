@@ -257,12 +257,15 @@ public class Game extends Activity {
 			row = (int) (Math.random() * (boardSize));
 			col = (int) (Math.random() * (boardSize));
 			Log.d("Shuffle", "Row: " + row + "Col: " + col);
-			ImageView img = mCells[row][col];
-			GamePiece move = mBoard.getPieceAt(row, col);
-			if(move == null)
-				Log.e("move", "Move is null");
-			else if(checkMobility(move))
-				swapPieces(move);
+			if(!(mBlankRow == row && mBlankCol == col)){
+				ImageView img = mCells[row][col];
+				//GamePiece move = mBoard.getPieceAt(row, col);
+				GamePiece move = (GamePiece) img.getTag();
+				if(move == null)
+					Log.e("move", "Move is null");
+				else if(checkMobility(move))
+					swapPieces(move);
+			}
 			
 		}
 	}
