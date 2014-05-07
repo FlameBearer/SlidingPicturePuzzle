@@ -27,8 +27,13 @@ public class GameBoard {
 		mBoard = new GamePiece[mBoardSize][mBoardSize];
 		mBlank = new GamePiece((mBoardSize * mBoardSize) - 1);
 		mBlank.setImage(null);
+		mBlank.setPosition((mBoardSize - 1),(mBoardSize - 1));
 		//mBlank.setMobility(GamePiece.BLANK);
 		
+	}
+	
+	public GamePiece getBlank(){
+		return mBlank;
 	}
 	
 	public void setImage(Drawable drawable){

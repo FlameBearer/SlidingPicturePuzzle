@@ -214,8 +214,11 @@ public class Game extends Activity {
 				    	final Object tag = view.getTag();
 				    	GamePiece piece = (GamePiece) tag;
 				    	
-				    	if(checkMobility(piece))
+				    	if(checkMobility(piece)){
 				    		swapPieces(piece);
+					    	Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
+							Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
+				    	}
 				    	else{
 				    	
 							ImageView imgView = (ImageView) view;
@@ -235,9 +238,10 @@ public class Game extends Activity {
 		int col = piece.getCol();
 		Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
 		Log.d("Piece", "Row: " + row + "Column: " + col);
-		if(mBlankRow == row && mBlankCol == col)
-			return false;
-		
+		if((mBlankRow == row) && (mBlankCol == col)){
+			Log.e("CMD", "Enter no move");
+			return false;	
+		}
 		else if((row - mBlankRow) == 0)
 			return true;
 		else if((col - mBlankCol) == 0)
@@ -262,6 +266,7 @@ public class Game extends Activity {
 		piece.setPosition(mBlankRow, mBlankCol);		
 		mBlankRow = row;
 		mBlankCol = col;
+		
 		
 	}
 	
