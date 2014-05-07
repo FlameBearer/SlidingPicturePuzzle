@@ -2,8 +2,8 @@ package com.example.slidingpicturepuzzle;
 
 import java.util.zip.Inflater;
 
+import android.app.ActionBar.LayoutParams;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -11,17 +11,20 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 public class Game extends Activity {
 	private RelativeLayout mGameLayout;
+	private LinearLayout mMoveCountLayout;
 	private GameBoard mBoard;
 	private Drawable mImage;
 	private TableLayout mTable;
@@ -58,16 +61,33 @@ public class Game extends Activity {
         
         initGame();
         initBoard();
-       // mBlankRow = 4;
-        //mBlankCol = 4;
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.count_down, null);
-        mGameLayout.addView(view);
-        mGameLayout.invalidate();
+        initCount();
+        mGameLayout.addView(mMoveCountLayout);
         mGameLayout.addView(mTable);
         mGameLayout.invalidate();
    
     }
+	
+	protected void initCount(){
+		mMoveCountLayout = new LinearLayout(this);
+		RelativeLayout.LayoutParams countParams = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		countParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		mMoveCountLayout.setLayoutParams(countParams);
+		mMoveCountLayout.setOrientation(LinearLayout.HORIZONTAL);
+		LayoutParams textParams = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		TextView text = new TextView(this);
+		text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+		text.setText(R.string.moveCountString);
+		text.setLayoutParams(textParams);
+		TextView count = new TextView(this);
+		count.setLayoutParams(textParams);
+		count.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+		count.setText(R.string.moveCount);
+		mMoveCountLayout.addView(text);
+		mMoveCountLayout.addView(count);
+		//mMoveCountLayout.setlayou
+		
+	}
 	
 	protected void initGame(){
 		mGameLayout = new RelativeLayout(this){
@@ -99,7 +119,7 @@ public class Game extends Activity {
 	}
 	
 	//Implement hopefully
-//	private final class MyTouchListener implements OnTouchListener {
+	//private final class MyTouchListener implements OnTouchListener {
 //
 //	    	int prevX,prevY;
 //
