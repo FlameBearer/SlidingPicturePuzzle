@@ -14,7 +14,7 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static final int background=0x7f050001;
+        public static final int dimmer=0x7f050001;
         public static final int divider=0x7f050000;
         public static final int table=0x7f050002;
     }

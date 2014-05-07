@@ -12,10 +12,13 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -47,7 +50,7 @@ public class Game extends Activity {
         	images[i] = icons.getDrawable(i);
         
         icons.recycle();
-        mImage = images[0];
+        mImage = images[1];
         newGame(3);
         mBoard.setImage(mImage);
         
@@ -86,6 +89,56 @@ public class Game extends Activity {
 		mBoard = new GameBoard(difficutly);
 	}
 	
+	
+	//Implement hopefully
+//	private final class MyTouchListener implements OnTouchListener {
+//
+//	    	int prevX,prevY;
+//
+//	        @Override
+//	        public boolean onTouch(final View v,final MotionEvent event){
+//
+//	        	//final TableRow.LayoutParams par = (TableRow.LayoutParams)v.getLayoutParams();
+//	        	float downx, downy, upx, upy;
+//	        	ImageView view = (ImageView) v;
+//	        	
+//	        	switch(event.getAction()){
+//	        	
+//	        		case MotionEvent.ACTION_MOVE:{
+//  
+//	        			upx = event.getX();
+//	        			upy = event.getY();
+//	        			
+//	        			view.invalidate();
+//	        			downx = upx;
+//	        			downy = upy;
+//
+//	        		}
+//	        		
+//	        		case MotionEvent.ACTION_UP:{
+//	        			
+//	        			upx = event.getX();
+//	        			upy = event.getY();
+//	        			view.invalidate();
+//	        			break;
+//	        			
+//	        		}
+//	        		
+//	        		case MotionEvent.ACTION_DOWN: {
+//	        			
+//	        			downx = event.getX();
+//	        			downy = event.getY();
+//	        			break;
+//	        			
+//	        		}
+//	        	}
+//	        	
+//	        	return true;
+//	        	
+//	        }
+//	    	
+//	 }
+	
 	protected void initBoard(){
 		mTable = new TableLayout(this);
 		mTable.setBackgroundResource(R.color.table);
@@ -97,7 +150,8 @@ public class Game extends Activity {
 			for(int j = 0; j < boardSize; j++){
 				ImageView img = new ImageView(this);
 				mCells[i][j] = img;
-				//img.setOnClickListener(this);
+				img.setOnTouchListener(new MyTouchListener());
+				
 				row.addView(img);
 			}
 			mTable.addView(row);

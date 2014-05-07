@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="divider">#F00</color>
-    <color name="background">#000</color>
-    <color name="table">#F00</color>
+    <color name="dimmer">#6000</color>
+    <color name="table">#000</color>
     
 </resources>
