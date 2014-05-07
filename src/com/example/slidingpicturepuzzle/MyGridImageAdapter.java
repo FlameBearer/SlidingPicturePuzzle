@@ -71,7 +71,8 @@ public class MyGridImageAdapter extends BaseAdapter{
     	Intent intent = new Intent(mContext, Game.class);
     	Bitmap image = ((BitmapDrawable)img).getBitmap();
     	intent.putExtra(MainActivity.SELECTED_IMAGE_KEY, image);
-//    	startActivityForResult(intent, MainAcitivty.GAME_REQUEST);
+    	//startActivityForResult(intent, MainActivity.GAME_REQUEST);
+    	mContext.startActivity(intent);
     }
 
 	@Override

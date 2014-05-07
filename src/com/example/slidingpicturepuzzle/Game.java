@@ -1,8 +1,13 @@
 package com.example.slidingpicturepuzzle;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -42,7 +47,11 @@ public class Game extends Activity {
         	images[i] = icons.getDrawable(i);
         
         icons.recycle();
-        mImage = images[1];
+        
+		Intent intent = getIntent();
+		Bitmap img = (Bitmap)this.getIntent().getParcelableExtra(MainActivity.SELECTED_IMAGE_KEY);
+        //mImage = images[1];
+		mImage = new BitmapDrawable(res, img);
         newGame(EASY);
         mBoard.setImage(mImage);
         
