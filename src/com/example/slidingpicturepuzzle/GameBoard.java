@@ -11,7 +11,6 @@ import android.util.Log;
 public class GameBoard {
 	private GamePiece mBoard[][];
 	private GamePiece mBlank;
-	private boolean mIsComplete;
 	private int mBoardSize;
 	private float mImageRatio;
 	private Point mPieceSize;

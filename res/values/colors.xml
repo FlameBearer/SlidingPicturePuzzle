@@ -3,5 +3,6 @@
     <color name="divider">#F00</color>
     <color name="dimmer">#6000</color>
     <color name="table">#000</color>
+    <color name="image">#FFF</color>
     
 </resources>

@@ -16,6 +16,7 @@ public final class R {
     public static final class color {
         public static final int dimmer=0x7f050001;
         public static final int divider=0x7f050000;
+        public static final int image=0x7f050003;
         public static final int table=0x7f050002;
     }
     public static final class dimen {
@@ -38,18 +39,19 @@ public final class R {
         public static final int taco_truck_logo=0x7f020006;
     }
     public static final class id {
-        public static final int addImage=0x7f0a0005;
-        public static final int deleteImage=0x7f0a0006;
+        public static final int action_settings=0x7f0a0006;
         public static final int game=0x7f0a0001;
         public static final int gameBoard=0x7f0a0003;
-        public static final int gridImage=0x7f0a0004;
+        public static final int gridImage=0x7f0a0005;
         public static final int imageSelection=0x7f0a0000;
+        public static final int moveCountString=0x7f0a0004;
         public static final int moveCounter=0x7f0a0002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int board_layout=0x7f030001;
-        public static final int gridimage=0x7f030002;
+        public static final int count_down=0x7f030002;
+        public static final int gridimage=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f090000;
@@ -60,7 +62,8 @@ public final class R {
         public static final int addImage=0x7f070004;
         public static final int app_name=0x7f070000;
         public static final int deleteImage=0x7f070005;
-        public static final int moveCount=0x7f070006;
+        public static final int moveCount=0x7f070007;
+        public static final int moveCountString=0x7f070006;
         public static final int selection=0x7f070002;
     }
     public static final class style {

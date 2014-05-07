@@ -1,11 +1,8 @@
 package com.example.slidingpicturepuzzle;
 
-import java.util.ArrayList;
-
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;

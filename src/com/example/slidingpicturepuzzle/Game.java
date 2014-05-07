@@ -1,15 +1,17 @@
 package com.example.slidingpicturepuzzle;
 
+import java.util.zip.Inflater;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ public class Game extends Activity {
 	private GameBoard mBoard;
 	private Drawable mImage;
 	private TableLayout mTable;
+	private int mMoveCount = 0;
 	private int mBlankRow;
 	private int mBlankCol;
 	private int mLastWidth = -1, mLastHeight = -1;
@@ -46,7 +49,7 @@ public class Game extends Activity {
         icons.recycle();
         
 		Intent intent = getIntent();
-		Bundle extras = getIntent().getExtras();
+		Bundle extras = intent.getExtras();
 		int position = extras.getInt(MainActivity.SELECTED_IMAGE_KEY);
 		Log.d("CMD", "Position: " + position);
         mImage = images[position];
@@ -57,6 +60,10 @@ public class Game extends Activity {
         initBoard();
        // mBlankRow = 4;
         //mBlankCol = 4;
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.count_down, null);
+        mGameLayout.addView(view);
+        mGameLayout.invalidate();
         mGameLayout.addView(mTable);
         mGameLayout.invalidate();
    
@@ -90,13 +97,6 @@ public class Game extends Activity {
 	protected void newGame(int difficutly){
 		mBoard = new GameBoard(difficutly);
 	}
-	
-//	public void onClick(View view){
-//		final Object tag = view.getTag();
-//		ImageView imgView = (ImageView) view;
-//		imgView.setColorFilter(R.color.dimmer);
-//		
-//	}
 	
 	//Implement hopefully
 //	private final class MyTouchListener implements OnTouchListener {
@@ -159,8 +159,6 @@ public class Game extends Activity {
 				ImageView img = new ImageView(this);
 				mCells[i][j] = img;
 				//img.setOnTouchListener(new MyTouchListener());
-				
-				
 				row.addView(img);
 			}
 			mTable.addView(row);
@@ -216,6 +214,7 @@ public class Game extends Activity {
 				GamePiece piece = mBoard.getPieceAt(i, j);
 				img.setImageDrawable(piece.getImage());
 				img.setTag(piece);
+				img.setBackgroundResource(R.color.image);
 				if(i != (boardSize - 1) || j != (boardSize - 1)){
 					img.setOnClickListener(new pieceClick());
 				}
@@ -281,7 +280,9 @@ public class Game extends Activity {
 			}
 			
 		}
-		mBoard.print();
+		
+		mMoveCount = 0;
+		//mBoard.print();
 	}
 	
 	private void swapPieces(GamePiece piece){
@@ -306,6 +307,8 @@ public class Game extends Activity {
 		piece.setPosition(mBlankRow, mBlankCol);		
 		mBlankRow = row;
 		mBlankCol = col;
+		
+		mMoveCount++;
 		
 		
 	}
