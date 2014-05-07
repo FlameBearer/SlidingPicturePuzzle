@@ -246,13 +246,11 @@ public class Game extends Activity {
 		ImageView view = mCells[piece.getRow()][piece.getCol()];
 		mBlankRow = piece.getRow();
 		mBlankCol = piece.getCol();
-		ImageView temp = view;
-		view = blank;
+		GamePiece temp = piece;
+		view.setImageDrawable(blankPiece.getImage());
 		view.setTag(blankPiece);
-		blank = temp;
-		blank.setTag(piece);
-		
-		//view.setTag(two);
+		blank.setImageDrawable(temp.getImage());
+		blank.setTag(temp);
 		
 	}
 
