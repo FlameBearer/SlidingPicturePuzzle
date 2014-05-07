@@ -204,30 +204,29 @@ public class Game extends Activity {
 				ImageView img = mCells[i][j];
 				img.setLayoutParams(cellParams);
 				GamePiece piece = mBoard.getPieceAt(i, j);
-//				if(i == 2 && j == 2)
-//					img.setImageDrawable(null);
-//				else
-					img.setImageDrawable(piece.getImage());
+				img.setImageDrawable(piece.getImage());
 				img.setTag(piece);
-				img.setOnClickListener(new View.OnClickListener() {
-				    public void onClick(View view) {
-				    	final Object tag = view.getTag();
-				    	GamePiece piece = (GamePiece) tag;
-				    	
-				    	if(checkMobility(piece)){
-				    		swapPieces(piece);
-					    	Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
-							Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
-				    	}
-				    	else{
-				    	
-							ImageView imgView = (ImageView) view;
-							imgView.setColorFilter(R.color.dimmer);
-				    	}
-				    	
-				    	
-				     }
-				 });
+				if(i != (boardSize - 1) || j != (boardSize - 1)){
+					img.setOnClickListener(new View.OnClickListener() {
+					    public void onClick(View view) {
+					    	final Object tag = view.getTag();
+					    	GamePiece piece = (GamePiece) tag;
+					    	
+					    	if(checkMobility(piece)){
+					    		swapPieces(piece);
+						    	Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
+								Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
+					    	}
+					    	else{
+					    	
+								ImageView imgView = (ImageView) view;
+								imgView.setColorFilter(R.color.dimmer);
+					    	}
+					    	
+					    	
+					     }
+					 });
+				}
 			}
 		}
 		
@@ -257,9 +256,11 @@ public class Game extends Activity {
 		ImageView one = mCells[piece.getRow()][piece.getCol()];
 		ImageView two = mCells[mBlankRow][mBlankCol];	
 		
-		GamePiece blank = new GamePiece((mBlankRow * mBlankCol) + mBlankCol);
-		blank.setImage(null);
-		blank.setPosition(mBlankRow, mBlankCol);		
+		GamePiece blank = (GamePiece) two.getTag();
+		
+//		GamePiece blank = new GamePiece((mBlankRow * mBlankCol) + mBlankCol);
+//		blank.setImage(null);
+//		blank.setPosition(mBlankRow, mBlankCol);		
 		//GamePiece blank = mBoard.getPieceAt(mBlankRow, mBlankCol);		
 		assignPiece(one, blank);
 		assignPiece(two, piece);
