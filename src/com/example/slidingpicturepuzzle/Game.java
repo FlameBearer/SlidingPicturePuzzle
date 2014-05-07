@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -241,17 +242,26 @@ public class Game extends Activity {
 	}
 	
 	private void swapPieces(GamePiece piece){
-		ImageView blank = mCells[mBlankRow][mBlankCol];
-		GamePiece blankPiece = mBoard.getPieceAt(mBlankRow, mBlankCol);
-		ImageView view = mCells[piece.getRow()][piece.getCol()];
-		mBlankRow = piece.getRow();
-		mBlankCol = piece.getCol();
-		GamePiece temp = piece;
-		view.setImageDrawable(blankPiece.getImage());
-		view.setTag(blankPiece);
-		blank.setImageDrawable(temp.getImage());
-		blank.setTag(temp);
+		int row = piece.getRow();
+		int col = piece.getCol();
 		
+		GamePiece blankPiece = mBoard.getPieceAt(mBlankRow, mBlankCol);
+		GamePiece temp = piece;
+		ImageView one = mCells[piece.getRow()][piece.getCol()];
+		ImageView two = mCells[mBlankRow][mBlankCol];
+		assignPiece(one, blankPiece);
+		assignPiece(two, temp);	
+		
+		mBlankRow = row;
+		mBlankCol = col;
+		
+		Log.d("CMD", "Row: " + mBlankRow + "Column: " + mBlankCol);
+		
+	}
+	
+	private void assignPiece(ImageView img, GamePiece piece){
+		img.setImageDrawable(piece.getImage());
+		img.setTag(piece);
 	}
 
     @Override
