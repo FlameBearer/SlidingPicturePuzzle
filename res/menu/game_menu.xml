@@ -13,5 +13,8 @@
 	    <item
 	        android:id="@+id/hard_settings"
 	        android:title="@string/hardMode"/>
+	    <item
+        android:id="@+id/Developmer"
+        android:title="@string/myName"/>
     
 </menu>
