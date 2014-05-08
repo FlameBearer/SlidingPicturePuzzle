@@ -132,9 +132,18 @@ public class Game extends Activity {
 	}
 	
 	protected void newGame(int difficutly){
-		mBoard = new GameBoard(difficutly);
-		mBoard.setImage(mImage);
-		start();
+		if(mBoard == null){
+			mBoard = new GameBoard(difficutly);
+			mBoard.setImage(mImage);
+			start();
+		}
+		else{
+			mBoard = new GameBoard(difficutly);
+			mBoard.setImage(mImage);
+			start();
+		}
+		
+		
 	}
 	
 	//Implement hopefully

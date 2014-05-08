@@ -51,7 +51,7 @@ public class MyGridImageAdapter extends BaseAdapter{
         	public void onClick(View view){
         		launchGame(position);
         		ImageView img = (ImageView) view;
-        		img.setColorFilter(R.color.dimmer);
+        		//img.setColorFilter(R.color.dimmer);
         	}
         });
 		
