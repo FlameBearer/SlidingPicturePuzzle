@@ -138,9 +138,13 @@ public class Game extends Activity {
 			start();
 		}
 		else{
+			mLastWidth = mLastHeight = -1;
 			mBoard = new GameBoard(difficutly);
 			mBoard.setImage(mImage);
 			start();
+			if(mTable == null)
+				Log.d("CMD", "Error table not created");
+			
 		}
 		
 		
@@ -244,6 +248,8 @@ public class Game extends Activity {
 		RelativeLayout.LayoutParams boardParams = new RelativeLayout.LayoutParams(width, height);
 		boardParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		mTable.setLayoutParams(boardParams);
+		
+		Log.e("SIZE", " " + boardSize);
 		
 		//load and resize the image
 		width = width / boardSize - 2 * borderWidth;
@@ -385,16 +391,20 @@ public class Game extends Activity {
     	
     	case R.id.easy_setting:
     		//restart for easy size
-    		newGame(Game.EASY);
+    		if(mBoard.getSize() != EASY)
+    			newGame(EASY);
     		break;
     	
     	case R.id.medium_settings:
     		//restart for medium size
-    		newGame(Game.MEDIUM);
+    		if(mBoard.getSize() != MEDIUM)
+    			newGame(MEDIUM);
     		break;
     		
     	case R.id.hard_settings:
     		//restart for hard size
+    		if(mBoard.getSize() != HARD)
+    			newGame(HARD);
     		break;
     		
     	case R.id.shuffle_settings:
