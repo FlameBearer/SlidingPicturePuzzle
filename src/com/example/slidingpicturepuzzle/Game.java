@@ -1,3 +1,7 @@
+/**
+ * Used Konstantin Livitski n-Puzzle code
+ * For reference of how to go about building the table layout
+ */
 package com.example.slidingpicturepuzzle;
 
 import android.app.ActionBar.LayoutParams;

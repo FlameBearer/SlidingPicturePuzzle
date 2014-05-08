@@ -39,7 +39,7 @@ public final class R {
         public static final int taco_truck_logo=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0009;
+        public static final int Developmer=0x7f0a0009;
         public static final int backButton=0x7f0a0003;
         public static final int easy_setting=0x7f0a0006;
         public static final int gridImage=0x7f0a0004;
@@ -71,6 +71,7 @@ public final class R {
         public static final int mediumMode=0x7f070009;
         public static final int moveCount=0x7f070007;
         public static final int moveCountString=0x7f070006;
+        public static final int myName=0x7f07000d;
         public static final int selection=0x7f070002;
         public static final int shuffle=0x7f07000b;
     }
