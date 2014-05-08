@@ -157,7 +157,7 @@ public class Game extends Activity {
 		
 	}
 	
-	//Implement hopefully
+	//Implement hopefully in the future
 	//private final class MyTouchListener implements OnTouchListener {
 //
 //	    	int prevX,prevY;
@@ -225,6 +225,7 @@ public class Game extends Activity {
 	}
 
 	//resizes content for spacing between cells
+	//From N-Puzzle Code but with a twist to fit my game set up
 	protected void resizeContent(int screenWidth, int screenHeight){
 		
 		float imageRatio = mBoard.getImageRatio();
