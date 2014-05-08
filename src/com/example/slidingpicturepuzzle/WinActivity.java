@@ -40,7 +40,7 @@ public class WinActivity extends Activity {
 		Bundle extras = intent.getExtras();
 		int moveCount = extras.getInt(Game.MOVE_COUNT_KEY);
 		
-		String text = "Move Count: " + moveCount;
+		String text = "Total Moves: " + moveCount;
 		count.setText(text);
 		int index = extras.getInt(Game.WINNING_IMAGE_KEY);
 		
