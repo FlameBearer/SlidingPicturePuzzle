@@ -39,17 +39,20 @@ public final class R {
         public static final int taco_truck_logo=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0006;
-        public static final int easy_setting=0x7f0a0003;
-        public static final int gridImage=0x7f0a0001;
-        public static final int hard_settings=0x7f0a0005;
+        public static final int action_settings=0x7f0a0008;
+        public static final int easy_setting=0x7f0a0005;
+        public static final int gridImage=0x7f0a0003;
+        public static final int hard_settings=0x7f0a0007;
         public static final int imageSelection=0x7f0a0000;
-        public static final int medium_settings=0x7f0a0004;
-        public static final int shuffle_settings=0x7f0a0002;
+        public static final int medium_settings=0x7f0a0006;
+        public static final int moveCount=0x7f0a0001;
+        public static final int shuffle_settings=0x7f0a0004;
+        public static final int winImage=0x7f0a0002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int gridimage=0x7f030001;
+        public static final int activity_win=0x7f030001;
+        public static final int gridimage=0x7f030002;
     }
     public static final class menu {
         public static final int game_menu=0x7f090000;
@@ -60,6 +63,7 @@ public final class R {
         public static final int addDelete=0x7f070003;
         public static final int addImage=0x7f070004;
         public static final int app_name=0x7f070000;
+        public static final int backToStart=0x7f07000c;
         public static final int deleteImage=0x7f070005;
         public static final int easyMode=0x7f070008;
         public static final int hardMode=0x7f07000a;

@@ -26,6 +26,7 @@ public class Game extends Activity {
 	private LinearLayout mMoveCountLayout;
 	private GameBoard mBoard;
 	private Drawable mImage;
+	private int mImageIndex;
 	private TableLayout mTable;
 	private int mMoveCount = 0;
 	private TextView mCounter;
@@ -36,6 +37,8 @@ public class Game extends Activity {
 	public static final int EASY = 3;
 	public static final int MEDIUM = 4;
 	public static final int HARD = 5;
+	public static final String MOVE_COUNT_KEY = "moveCountKey";
+	public static final String WINNING_IMAGE_KEY = "winningImageKey";
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +56,9 @@ public class Game extends Activity {
         
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
-		int position = extras.getInt(MainActivity.SELECTED_IMAGE_KEY);
-		Log.d("CMD", "Position: " + position);
-        mImage = images[position];
+		mImageIndex = extras.getInt(MainActivity.SELECTED_IMAGE_KEY);
+		Log.d("CMD", "Position: " + mImageIndex);
+        mImage = images[mImageIndex];
         
         newGame(EASY);
         
@@ -291,13 +294,22 @@ public class Game extends Activity {
 		    	//Log.d("Blank", "Row: " + mBlankRow + "Column: " + mBlankCol);
 				//Log.d("Piece", "Row: " + piece.getRow() + "Column: " + piece.getCol());
 	    	}
-	    	if(mBoard.isSolved())
+	    	if(mBoard.isSolved()){
 	    		Log.d("CMD", "Solved!!!");
-	    	else
-	    		mBoard.print();
+	    		loadWinScreen();
+	    		
+	    	}
+	    	
 	    	
 	     }          
 	    
+	}
+	
+	private void loadWinScreen(){
+		Intent intent = new Intent(this, WinActivity.class);
+    	intent.putExtra(MOVE_COUNT_KEY, mMoveCount);
+    	intent.putExtra(WINNING_IMAGE_KEY, mImageIndex);
+    	this.startActivity(intent);
 	}
 	
 	private boolean checkMobility(GamePiece piece){

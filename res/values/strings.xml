@@ -13,5 +13,6 @@
     <string name="mediumMode">4x4 Puzzle</string>
     <string name="hardMode">5x5 Puzzle</string>
     <string name="shuffle">Shuffle Puzzle</string>
+    <string name="backToStart">Choose Another Image</string>
 
 </resources>
