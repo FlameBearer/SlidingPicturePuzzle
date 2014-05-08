@@ -56,16 +56,17 @@ public class Game extends Activity {
 		int position = extras.getInt(MainActivity.SELECTED_IMAGE_KEY);
 		Log.d("CMD", "Position: " + position);
         mImage = images[position];
+        
         newGame(EASY);
-        mBoard.setImage(mImage);
         
-        initCount();
-        initGame();
-        initBoard();
-        
-        mGameLayout.addView(mMoveCountLayout);
-        mGameLayout.addView(mTable);
-        mGameLayout.invalidate();
+//        initCount();
+//        initGame();
+//        initBoard();
+//        
+//        mGameLayout.addView(mMoveCountLayout);
+//        mGameLayout.addView(mTable);
+//        mGameLayout.invalidate();
+        //start();
    
     }
 	
@@ -89,6 +90,16 @@ public class Game extends Activity {
 		mMoveCountLayout.addView(mCounter);
 		//mMoveCountLayout.setlayou
 		
+	}
+	
+	private void start(){
+		initCount();
+        initGame();
+        initBoard();
+        
+        mGameLayout.addView(mMoveCountLayout);
+        mGameLayout.addView(mTable);
+        mGameLayout.invalidate();
 	}
 	
 	private void updateCounter(){
@@ -122,6 +133,8 @@ public class Game extends Activity {
 	
 	protected void newGame(int difficutly){
 		mBoard = new GameBoard(difficutly);
+		mBoard.setImage(mImage);
+		start();
 	}
 	
 	//Implement hopefully
@@ -363,14 +376,21 @@ public class Game extends Activity {
     	
     	case R.id.easy_setting:
     		//restart for easy size
+    		newGame(Game.EASY);
     		break;
     	
     	case R.id.medium_settings:
     		//restart for medium size
+    		newGame(Game.MEDIUM);
     		break;
     		
     	case R.id.hard_settings:
     		//restart for hard size
+    		break;
+    		
+    	case R.id.shuffle_settings:
+    		//re-shuffle the board
+    		shuffle();
     		break;
     	}
 		return true;
